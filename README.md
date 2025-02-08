@@ -3,3 +3,8 @@ The Independent Component Analysis is used for signal separation, the challenge 
 
 1. [The Aloha RFID collision detection classifier model description](latex/CollisionDetector.pdf) Feb, 7
 1. [Two-class aloha collision detection with RBF and Logistic Regression](ipynb/AlohaCollisionDetector2class_Feb7.ipynb) Feb, 7
+
+
+## Examples
+1. Import functions from files in the Goole Disc to the Google Colab: [example_util.ipynb](examples/example_util.ipynb), [example_util.py](examples/example_util.py)
+2. 
