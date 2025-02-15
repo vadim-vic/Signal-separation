@@ -7,4 +7,4 @@ The Independent Component Analysis is used for signal separation, the challenge 
 
 ## Examples
 1. Import functions from files in the Goole Disc to the Google Colab: [example_utility.ipynb](examples/example_utility.ipynb), [example_utility.py](examples/example_utility.py)
-2. 
+2. [Collect indices of the cartesian product of 1, ..., C sets](examples/16_Example_Cartesian_UpToC.ipynb )
