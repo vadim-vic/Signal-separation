@@ -12,6 +12,8 @@
 3. [RF modulation classification](https://github.com/kwyoke/RF_modulation_classification/tree/master) with [visualization](https://github.com/kwyoke/RF_modulation_classification/blob/master/dataset_visualisations.ipynb) by kwyoke
 4. [Wi-Fi and Bluetooth I/Q Recordings in the 2.4 GHz and 5 GHz](https://catalog.data.gov/dataset/wi-fi-and-bluetooth-i-q-recordings-in-the-2-4-ghz-and-5-ghz-bands-with-low-cost-software-d) by NSTI and Adam Wunderlich
 5. [PyRiemann 4-class classification](https://pyriemann.readthedocs.io/en/latest/auto_examples/biosignal-erp/plot_classify_EEG_tangentspace.html#sphx-glr-auto-examples-biosignal-erp-plot-classify-eeg-tangentspace-py) by Alexandre Barachant
+6. [Dataset for Bluetooth 5.1 Direction of Arrival](https://doi.org/10.1016/j.dib.2021.107576) by Piazzese et al., 2021 
+
 
 ## Birthday paradox
 1. [Birthday Problem](https://pi.math.cornell.edu/~mec/2008-2009/TianyiZheng/Birthday.hml): probability of pair, probability of no-match
