@@ -14,7 +14,9 @@
 5. [PyRiemann 4-class classification](https://pyriemann.readthedocs.io/en/latest/auto_examples/biosignal-erp/plot_classify_EEG_tangentspace.html#sphx-glr-auto-examples-biosignal-erp-plot-classify-eeg-tangentspace-py) by Alexandre Barachant
 
 ## Birthday paradox
-1. [https://pi.math.cornell.edu/~mec/2008-2009/TianyiZheng/Birthday.html](Birthday Problem): probability of pair, probability of no-match
+1. [Birthday Problem](https://pi.math.cornell.edu/~mec/2008-2009/TianyiZheng/Birthday.hml): probability of pair, probability of no-match
+2. [Understanding the birthday problem](https://www.jstor.org/stable/27956609) by Frederick Mosteller
+3. [A probabilistic approach to coincidences](https://dialnet.unirioja.es/descarga/articulo/5997063.pdf): the birthday paradox  by Santos and Dias, 2015
 
 ## Wiki 
 1. [Quadrature_amplitude_modulation](https://en.wikipedia.org/wiki/Quadrature_amplitude_modulation)
