@@ -31,5 +31,8 @@
 4. [RFID on Reddid](https://www.reddit.com/r/RFID/)
 5. [Current Trends and Challenges in RFID](https://www.intechopen.com/chapters/16527) by Kang and Prodanoff, 2010
 
+## ALOHA Throughputs
+![ALOHA Throughputs versus Channel Traffic](https://media.geeksforgeeks.org/wp-content/uploads/20240731115124/What-is-Slotted-ALOHA.png)
+
 ## The signal mixture
 ![General formula for N sources](NSources.png)
