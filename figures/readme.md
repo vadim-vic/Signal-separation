@@ -1,4 +1,4 @@
-# Figures to illustrate the In-phase / Quadrature data analitic signal 
+# Figures to illustrate the In-phase / Quadrature data analytic signal 
 
 Original and reconstructed signal without the added noise
 
