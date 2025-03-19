@@ -25,5 +25,5 @@ To run the data-related Google Colab notebooks, two files from the [data folder]
 asks the access to the uploaded files. Press the button “Continue” each time to let the Google Colab access your Google Disk, there will be several consequent requests. The experiment runs until the end. The figure shows the orange “Files” icon and the “Runtime” menu open.
 <!--![Upload the files to Google Colab Python notebook to run the computational
 experiment.](../latex/fig_demo_upload.png)-->
-<img src="[image-url](https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_demo_upload.png?raw=true)" alt="Upload the files to Google Colab Python notebook to run the computational
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_demo_upload.png?raw=true)" alt="Upload the files to Google Colab Python notebook to run the computational
 experiment." width="300" height="200">
