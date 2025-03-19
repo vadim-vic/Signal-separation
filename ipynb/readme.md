@@ -16,7 +16,7 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 - An example of the shift function in self-modeling, [93](93_Example_shift.ipynb)
 - An example of Singular Spectrum Analysis to plot two PC, [6](7_MixAndPlot_SSA.ipynb)
 - Operations with complex vectors sometimes visually differ, [97](96_Example_ComplexVectorProjection.ipynb)  
-- How to use a separate function .py file in the Colab notebook, (.ipynb)[example_utility.ipynb] and (.py)[ipynb/example_utility.py]
+- How to use a separate function .py file in the Colab notebook, [.ipynb](example_utility.ipynb) and [.py](ipynb/example_utility.py)
 
 ## The Colad data and function loading 
 To run the data-related Google Colab notebooks, two files from the [data folder](../data/) should be uploaded to the notebook drive. After you open a notebook in Colab, press the “Files” icon on the left panel of Colab (the fifth from the top, below the key). Then press the “Upload to session storage” icon right below the word “Files”. From your local disk upload the files inphase_quadrature_data.json, inphase_quadrature_noise.json, and inphase_quadrature_lib.npy. The last one is attached along with this text. In the Colab menu click “Runtime” and select the item “Run all”. After the first cell runs, Colab
