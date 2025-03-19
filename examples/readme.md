@@ -11,3 +11,5 @@ These examples are mainly AI-generated. The collection is useful for analyzing t
 - [6_6](6_6_Example_FFT.ipynb) Fast Fourier Transform (FFT)
 - [6_7](6_7_Example_Wavelet.ipynb) Wavelet Transform
 - [6_8](6_8_Example_SVDforComplexValuedMatrix.ipynb) Singular Value Decomposition (SVD) for Complex-Valued Matrices
+
+![Continuous Wavelet Transform of Complex-Valued Signal](../figures/fig_CWT_of_Complex-Valued Signal.png)
