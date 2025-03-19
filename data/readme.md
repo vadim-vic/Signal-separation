@@ -15,4 +15,4 @@ the signal reconstruction procedure.
 1. [In-phase and quadrature components](https://en.wikipedia.org/wiki/In-phase_and_quadrature_components) by Wiki
 2. [What is I/Q Data? 5G in Wireless Communication](https://www.linkedin.com/pulse/what-iq-data-in-depth-look-reference-5g-wireless-ravi-shekhar-8ypqc/) by Ravi Shekhar Singh
 3. [ I/Q Data for Dummies](http://whiteboard.ping.se/SDR/IQ) by Mikael Q Kuisma
-4. [more references](latex/)
+4. [more references](../latex/)
