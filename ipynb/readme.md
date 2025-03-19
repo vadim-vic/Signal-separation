@@ -13,3 +13,6 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 ## Examples and plots
 - An example of how to collect indices of the cartesian product of sets [16](16_Example_Cartesian_UpToC.ipynb)
 - Plot the probability of the collision-free transmission, [1](1_Plot_Birthday_Probability_NQ.ipynb)
+- An example of the shift function in self-modeling, [93](93_Example_shift.ipynb)
+- An example of Singular Spectrum Analysis to plot two PC, [6](7_MixAndPlot_SSA.ipynb)
+  
