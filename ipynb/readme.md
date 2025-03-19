@@ -26,4 +26,4 @@ asks the access to the uploaded files. Press the button “Continue” each time
 <!--![Upload the files to Google Colab Python notebook to run the computational
 experiment.](../latex/fig_demo_upload.png)-->
 <img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_demo_upload.png?raw=true)" alt="Upload the files to Google Colab Python notebook to run the computational
-experiment." width="300" height="200">
+experiment." width="400" height="200">
