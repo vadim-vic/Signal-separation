@@ -5,7 +5,7 @@ Two files in this folder are the data file and the noise file. Both files contai
 This figure shows the real and imaginary parts of two signals.
 ![The distribution of noise is Gaussian](../figures/fig_almost_similar_signals.png)
 
-## GAussian noise
+## Gaussian noise
 The ground truth noise samples from the dataset, have mu <= 0.005 (booth, real or image) and
 standard deviation sigma = 0.1361. The plot shows 3 sigma. This distribution function is used in
 the signal reconstruction procedure.
