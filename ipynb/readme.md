@@ -23,5 +23,7 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 ## The Colad data and function loading 
 To run the data-related Google Colab notebooks, two files from the [data folder](../data/) should be uploaded to the notebook drive. After you open a notebook in Colab, press the “Files” icon on the left panel of Colab (the fifth from the top, below the key). Then press the “Upload to session storage” icon right below the word “Files”. From your local disk upload the files inphase_quadrature_data.json, inphase_quadrature_noise.json, and inphase_quadrature_lib.npy. The last one is attached along with this text. In the Colab menu click “Runtime” and select the item “Run all”. After the first cell runs, Colab
 asks the access to the uploaded files. Press the button “Continue” each time to let the Google Colab access your Google Disk, there will be several consequent requests. The experiment runs until the end. The figure shows the orange “Files” icon and the “Runtime” menu open.
-![Upload the files to Google Colab Python notebook to run the computational
-experiment.](../latex/fig_demo_upload.png)
+<!--![Upload the files to Google Colab Python notebook to run the computational
+experiment.](../latex/fig_demo_upload.png)-->
+<img src="[image-url](https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_demo_upload.png?raw=true)" alt="Upload the files to Google Colab Python notebook to run the computational
+experiment." width="300" height="200">
