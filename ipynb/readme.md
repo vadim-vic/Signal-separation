@@ -15,4 +15,4 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 - Plot the probability of the collision-free transmission, [1](1_Plot_Birthday_Probability_NQ.ipynb)
 - An example of the shift function in self-modeling, [93](93_Example_shift.ipynb)
 - An example of Singular Spectrum Analysis to plot two PC, [6](7_MixAndPlot_SSA.ipynb)
-  
+- Operations with complex vectors sometimes visually differ, [97](96_Example_ComplexVectorProjection.ipynb)  
