@@ -3,7 +3,7 @@ Two files in this folder are the data file and the noise file. Both files contai
 
 ## I/Q data signal
 This figure shows the real and imaginary parts of two signals.
-![The distribution of noise is Gaussian](../latex/fig_almost_similar_signals.png)
+![The distribution of noise is Gaussian](../figures/fig_almost_similar_signals.png)
 
 ## GAussian noise
 The ground truth noise samples from the dataset, have mu <= 0.005 (booth, real or image) and
