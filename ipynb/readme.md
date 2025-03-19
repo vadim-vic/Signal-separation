@@ -11,5 +11,5 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 - Four-class Aloha collision detector, early draft [ACD](AlohaCollisionDetector.ipynb)
 
 ## Examples and plots
-- An example of how to collect indices of the cartesian product of sets [16](ipynb/16_Example_Cartesian_UpToC.ipynb)
+- An example of how to collect indices of the cartesian product of sets [16](16_Example_Cartesian_UpToC.ipynb)
 - Plot the probability of the collision-free transmission, [1](1_Plot_Birthday_Probability_NQ.ipynb)
