@@ -6,4 +6,5 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 - Select features and their optimal number to approximate the target, [12](12_SingularValuesDecomposition.ipynb)
 - Plot the probability of the collision-free transmission, [1](1_Plot_Birthday_Probability_NQ.ipynb)
 - Find the centroids of the signal clusters, [9](9_Distance_to_6bit.ipynb)
-- Two-class of Aloha collision detections, early draft [A](AlohaCollisionDetector2class_Feb7.ipynb)
+- Two-class Aloha collision detector, early draft [ACD2](AlohaCollisionDetector2class_Feb7.ipynb)
+- Four-class Aloha collision detector, early draft [ACD](AlohaCollisionDetector.ipynb)
