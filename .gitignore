@@ -1,12 +1,11 @@
 /tmp/
 /archive/
 /.idea/
-/latex/CollisionDetector_web.aux
-/latex/CollisionDetector_web.bbl
-/latex/CollisionDetector_web.blg
-/latex/CollisionDetector_web.log
-/latex/CollisionDetector_web.out
-/latex/CollisionDetector_web.pdf
-/latex/CollisionDetector_web.synctex.gz
-/latex/CollisionDetector_web.tex.bak
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.tex.bak
 
