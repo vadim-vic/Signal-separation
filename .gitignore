@@ -2,10 +2,10 @@
 /archive/
 /.idea/
 *.aux
+*.bak
 *.bbl
 *.blg
 *.log
 *.out
 *.synctex.gz
 *.tex.bak
-
