@@ -56,10 +56,10 @@ def run(A, y, mdl, max_basis = 1, max_models = 100, max_shift = 9):
 
 class FeatureSelection:
     # Collects and analyses basis feature set to approximate unknown linear combination
-    def __init__(self, A, answer_X=None, max_shift=9, max_basis=5, max_models=100):
+    def __init__(self, A, max_shift=9, max_basis=5, max_models=100):
         self.A = A
         self.n_basis = np.size(A,1) # Number of columns
-        self.answer_X = answer_X
+        # self.answer_X = answer_X
         self.MAX_SHIFT = max_shift
         self.MAX_BASIS = max_basis
         self.MAX_MODELS = max_models
