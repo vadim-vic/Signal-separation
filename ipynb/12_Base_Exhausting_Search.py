@@ -17,6 +17,7 @@ with open(f_path + f_prefix + 'data.json') as f:
 with open(f_path + f_prefix + 'noise.json') as f:
     iqnoise = np.array(json.load(f))
     iqnoise = iqnoise[:, 0, :] + 1j * iqnoise[:, 1, :]
+del f, f_path, f_prefix
 
 def run(A, y, mdl, max_basis = 1, max_models = 100, max_shift = 9):
     # Exhaustive search of linear combination of columns A to approximate y
@@ -70,7 +71,7 @@ class FeatureSelection:
                              'par': np.empty([])  # set of parameters for each feature
                              }}
 
-    def plot_mdl(self, max_models=None):
+    def plot_mdl(self, y, max_models=None):
         # Plot all
         if max_models is None:
             max_models = len(self.mdl) # Plots all items from mdl
@@ -87,28 +88,42 @@ class FeatureSelection:
                 break
 
 
+# Load the basis features
 dbasis = get_clusters() # The key is the centroid index, the value is the vector of item indices
-# Later we check the reconstructed signal with one of the cluster's signals
 
-cls_sizes = [0, 0, 0, 10]  # Set sample size for i-th collision
+idx_basis = list(dbasis.keys())
+Abase = iqdata[idx_basis].transpose()
+
+# Load the data
+cls_sizes = [0, 0, 10, 0, 0, 0]  # Set sample size for i-th collision
 dset = gen_base(iqdata, iqnoise, dbasis, cls_sizes)
 print(list(dset[0].keys())) # List of the keys in each data sample
-# print(dset[0])
+del dbasis, cls_sizes #, iqdata, iqnoise
+
+# Later we check the reconstructed signal with one of the cluster's signals
 
 # Set one data sample to reconstruct
-answer_y = 7
-y = dset[answer_y]['data']
-answer_X = dset[answer_y]['basis']
-answer_coeff = dset[answer_y]['coeff']
-answer_shift = dset[answer_y]['shift']
-print(answer_X)
+def next_sample_dset(dset, idx_basis):
+    # Yields the next sample in the dset item every time it's called
+    # The structure of the dictionary dset is in the function gen_base
+    for idx in range(len(dset)):
+        answer_y = dset[idx]['data']
+        answer_X = dset[idx]['basis']
+        answer_A = [idx_basis.index(i) if i in idx_basis else -1 for i in answer_X]  # What if -1 happens
+        answer_coeff = dset[idx]['coeff']
+        answer_shift = dset[idx]['shift']
+        yield answer_y, answer_X, answer_A, answer_coeff, answer_shift
 
-data_scaled = scale_complex(iqdata[answer_X], answer_coeff)
-plt_clust_Xyy(data_scaled, y, y, answer_X, answer_y, 0)
+next_sample = next_sample_dset(dset, idx_basis)
 
-del data_scaled, cls_sizes, dset
+answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
+answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
 
-A = iqdata[list(dbasis.keys())].transpose()
-fs = FeatureSelection(A,y)
-fs.mdl = run(fs.A, y, fs.mdl, max_basis = 1)
-fs.plot_mdl()
+dscaled = scale_complex(iqdata[answer_X], answer_coeff)
+plt_clust_Xyy(dscaled, answer_y, answer_y, answer_X, 0, 0)
+del dscaled, answer_X
+
+# Check the reconstruction quality
+fs = FeatureSelection(Abase)
+fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis = 2, max_models = 10)
+fs.plot_mdl(answer_y)

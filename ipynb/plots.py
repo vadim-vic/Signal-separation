@@ -16,32 +16,29 @@ def plt_clust_Xyy(X, y, y1, idx_X, idx_y, cnt):
   plt.rcParams['ytick.labelsize'] = 12#24
   plt.rcParams['legend.fontsize'] = 12#24
   plt.rcParams['axes.labelsize'] = 10#24
+  # Create a figure and two subplots (1 row, 2 columns)
+  fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
 
   idx_X = list(range(X.shape[0])) if idx_X is None else idx_X
   idx_y = -1 if idx_y is None else  idx_y
 
   for i in range(len(idx_X)):
-    plt.plot(X.real[i], label = str(idx_X[i]))
-  plt.plot(y.real, label=str(idx_y), color='black', linewidth=2)
-  plt.plot(y1.real, color='red', linewidth=2)
-
+    ax1.plot(X.real[i], label=str(idx_X[i]))
+    ax2.plot(X.imag[i], label=str(idx_X[i]))
   # Finalize the plot (real)
-  plt.ylabel('Amplitude, V (real)', fontname='DejaVu Serif')
-  plt.xlabel('Time ticks', fontname='DejaVu Serif')
-  plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
-  plt.savefig('../tmp/' + str(cnt) + '_' + str(idx_y) + str(idx_X)+'_real.png', dpi=300, bbox_inches='tight')
-  # plt.savefig('../tmp/' + str(idx_y[0])+'_real.png', dpi=300, bbox_inches='tight')
-  plt.close()
-
-  for i in range(len(idx_X)):
-    plt.plot(X.imag[i], label = str(idx_X[i]))
-  plt.plot(y.imag, label=str(idx_y), color='black', linewidth=2)
-  plt.plot(y1.imag, color='red', linewidth=2)
-
+  ax1.plot(y.real, label=str(idx_y), color='black', linewidth=2)
+  ax1.plot(y1.real, color='red', linewidth=2)
+  ax1.set_ylabel('Amplitude, V (real)', fontname='DejaVu Serif')
+  ax1.set_xlabel('Time ticks', fontname='DejaVu Serif')
+  # ax1.legend(loc='upper left', bbox_to_anchor=(1, 1))
   # Finalize the plot (imaginarty)
-  plt.ylabel('Amplitude, V (imaginary)', fontname='DejaVu Serif')
-  plt.xlabel('Time ticks', fontname='DejaVu Serif')
-  plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
+  ax2.plot(y.imag, label=str(idx_y), color='black', linewidth=2)
+  ax2.plot(y1.imag, color='red', linewidth=2)
+  ax2.set_ylabel('Amplitude, V (imaginary)', fontname='DejaVu Serif')
+  ax2.set_xlabel('Time ticks', fontname='DejaVu Serif')
+  ax2.legend(loc='upper left', bbox_to_anchor=(1, 1))
+  # The whole plot
+  plt.tight_layout()
   plt.savefig('../tmp/' + str(cnt) + '_' + str(idx_y) + str(idx_X) + '_imag.png', dpi=300, bbox_inches='tight')
   plt.close()
   return
