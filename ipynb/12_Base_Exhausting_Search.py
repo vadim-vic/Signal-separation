@@ -51,8 +51,7 @@ def run(A, y, mdl, max_basis = 1, max_models = 100, max_shift = 9):
                 shifts.append(best_shift)
                 # In the vector best_b the last feature corresponds to the last item
                 mdl_new.update({idx_new: {'err': err_min, 'fea': features, 'sft': shifts, 'par': best_b}})
-
-    mdl = dict(sorted(mdl_new.items(), key=lambda i: i[1]['err'])[:max_models])
+        mdl = dict(sorted(mdl_new.items(), key=lambda i: i[1]['err'])[:max_models])
     return mdl
 
 class FeatureSelection:
@@ -78,16 +77,19 @@ class FeatureSelection:
 
         for idx, cnt in zip(fs.mdl, range(len(self.mdl))):
             X = self.A[:, list(idx)]
+            fea = self.mdl[idx]['fea']
             err = self.mdl[idx]['err']
             par = self.mdl[idx]['par']
             sft = self.mdl[idx]['sft']
             X = shift(X, sft)
             y1 = X @ par
-            plt_clust_Xyy(X.transpose(), y, y1, list(idx), 'E {:.3f}'.format(err), cnt)
+            plt_clust_Xyy(X.transpose(), y, y1, fea, 'E {:.3f}'.format(err), cnt)
             if cnt > max_models:
                 break
 
-
+    def best_model(self):
+        best_mdl = min(self.mdl.items(), key=lambda i: i[1]['err'])[1]
+        return best_mdl
 # Load the basis features
 dbasis = get_clusters() # The key is the centroid index, the value is the vector of item indices
 
@@ -95,7 +97,7 @@ idx_basis = list(dbasis.keys())
 Abase = iqdata[idx_basis].transpose()
 
 # Load the data
-cls_sizes = [0, 0, 10, 0, 0, 0]  # Set sample size for i-th collision
+cls_sizes = [0, 0, 0, 0, 0, 100]  # Set sample size for i-th collision
 dset = gen_base(iqdata, iqnoise, dbasis, cls_sizes)
 print(list(dset[0].keys())) # List of the keys in each data sample
 del dbasis, cls_sizes #, iqdata, iqnoise
@@ -113,17 +115,28 @@ def next_sample_dset(dset, idx_basis):
         answer_coeff = dset[idx]['coeff']
         answer_shift = dset[idx]['shift']
         yield answer_y, answer_X, answer_A, answer_coeff, answer_shift
-
 next_sample = next_sample_dset(dset, idx_basis)
 
-answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
-answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
-
-dscaled = scale_complex(iqdata[answer_X], answer_coeff)
-plt_clust_Xyy(dscaled, answer_y, answer_y, answer_X, 0, 0)
-del dscaled, answer_X
+# answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
+# dscaled = scale_complex(iqdata[answer_X], answer_coeff)
+# plt_clust_Xyy(dscaled, answer_y, answer_y, answer_X, 0, 0)
+# del dscaled, answer_X
 
 # Check the reconstruction quality
-fs = FeatureSelection(Abase)
-fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis = 2, max_models = 10)
-fs.plot_mdl(answer_y)
+cnt_err = 0
+for i in range(100):
+    # Get a sample from the dataset
+    answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
+    fs = FeatureSelection(Abase) # Reset the list of models
+    # Run the reconstruction procedure
+    fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis = 5, max_models = 6)
+    # Plot the best model
+    # fs.plot_mdl(answer_y, 1)
+    # Check the quality of the reconstruction by comparing with the answer
+    best_A = fs.best_model()['fea']
+    if set(answer_A) == set(best_A):
+        print(i, 'error:', fs.best_model()['err'])
+    else:
+        cnt_err += 1
+        print(i, 'error:', fs.best_model()['err'], 'answer:', answer_A, 'model:', best_A)
+print(cnt_err ,cnt_err / len(dset))
