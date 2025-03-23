@@ -10,6 +10,7 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 - Two-class Aloha collision detector, early draft, [ACD2](AlohaCollisionDetector2class_Feb7.ipynb)
 - Four-class Aloha collision detector, early draft, [ACD](AlohaCollisionDetector.ipynb)
 - Dictionary of models to approximate the mixed signal, [14](14_Base_Exhaustive_Search.ipynb)
+- For two time series define use a modification of the Hausdorff metric [15](15_Hausdorf_distance_clustering.ipynb)
 
 ## Examples and plots
 - An example of how to collect indices of the cartesian product of sets [16](16_Example_Cartesian_UpToC.ipynb)

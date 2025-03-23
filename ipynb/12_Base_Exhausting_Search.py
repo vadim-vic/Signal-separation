@@ -100,8 +100,9 @@ Abase = iqdata[idx_basis].transpose()
 cls_sizes = [0, 0, 0, 0, 0, 100]  # Set sample size for i-th collision
 dset = gen_base(iqdata, iqnoise, dbasis, cls_sizes)
 print(list(dset[0].keys())) # List of the keys in each data sample
-del dbasis, cls_sizes #, iqdata, iqnoise
 
+n_models = 6
+n_classes = len(cls_sizes)
 # Later we check the reconstructed signal with one of the cluster's signals
 
 # Set one data sample to reconstruct
@@ -124,19 +125,41 @@ next_sample = next_sample_dset(dset, idx_basis)
 
 # Check the reconstruction quality
 cnt_err = 0
+cnt_resolved = 0
+X_cls = np.empty([0,n_models * n_classes])  # objects to 4 class classification
+y_cls = []  # target 4 classes
 for i in range(100):
     # Get a sample from the dataset
     answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
-    fs = FeatureSelection(Abase) # Reset the list of models
+    fs = FeatureSelection(Abase, max_models = n_models ) # Reset the list of models
     # Run the reconstruction procedure
-    fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis = 5, max_models = 6)
+    # fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis=5, max_models=6)
+
+    i_dist = np.array([])
+    # For each number of collided signals
+    for c in range(n_classes):
+        fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis = 1,  max_models = n_models)
+        i_dist = np.hstack((i_dist, np.array([values['err'] for values in fs.mdl.values()])))
+        # print(np.shape(i_dist))
+    #if np.size(X_cls) == 0:
+    #    X_cls = np.array([i_dist])
+    #else:
+    X_cls = np.vstack((X_cls, i_dist.transpose()))
+    y_cls.append(len(answer_A))
     # Plot the best model
     # fs.plot_mdl(answer_y, 1)
     # Check the quality of the reconstruction by comparing with the answer
     best_A = fs.best_model()['fea']
+
+    dist = fs.best_model()['err']
     if set(answer_A) == set(best_A):
-        print(i, 'error:', fs.best_model()['err'])
+        print(i, 'errors:', dist)
     else:
         cnt_err += 1
-        print(i, 'error:', fs.best_model()['err'], 'answer:', answer_A, 'model:', best_A)
-print(cnt_err ,cnt_err / len(dset))
+        print(i, 'errors:', dist, 'answer:', answer_A, 'model:', best_A)
+    len_resolved = len(set(answer_A) & set(best_A))
+    if len_resolved > 0:
+        cnt_resolved += 1
+        print(i, 'resolved:', len_resolved)
+print('_____________________')
+print(cnt_err , cnt_resolved)

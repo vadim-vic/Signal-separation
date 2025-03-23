@@ -112,10 +112,6 @@ def plt_cluster(X, idx): # X and X1 must be of the same shape
 def plt_compare_vec(x, y, xlabel = 'First', ylabel = 'Second'): # X and X1 must be of the same shape
   #indices = np.random.choice(len(X), n, replace=False)# [0] # Pick an item
   #for index in indices:
-  plt.plot(x.real, label = 'First, re', linestyle='dashed')
-  plt.plot(x.imag, label = 'First, im', linestyle='dashed')
-  plt.plot(y.real, label = 'Second, re')
-  plt.plot(y.imag, label = 'Second, im')
   plt.rcParams['font.family'] = 'DejaVu Serif'
   plt.rcParams['lines.linewidth'] = 2
   #plt.rcParams['lines.markersize'] = 12
@@ -123,12 +119,15 @@ def plt_compare_vec(x, y, xlabel = 'First', ylabel = 'Second'): # X and X1 must 
   plt.rcParams['ytick.labelsize'] = 12#24
   plt.rcParams['legend.fontsize'] = 12#24
   plt.rcParams['axes.labelsize'] = 10#24
+  plt.plot(x.real, label='First, real', color='red', linewidth=3)
+  plt.plot(x.imag, label='First, imag', color='red', linewidth=3, linestyle='dashed')
+  plt.plot(y.real, label='Second, real', color='blue', linewidth=3)
+  plt.plot(y.imag, label='Second, imag',  color='blue',linewidth=3, linestyle='dashed')
   plt.xlabel('Time ticks', fontname='DejaVu Serif')
   plt.ylabel('Amplitude, V', fontname='DejaVu Serif')
   plt.legend()
   plt.show()
   return
-  
   
 def plot_AUC(auc, accuracy, fpr, tpr):
   plt.plot(fpr, tpr, label='ROC curve (AUC = %0.2f)' % auc)

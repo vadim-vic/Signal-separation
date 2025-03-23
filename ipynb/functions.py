@@ -119,7 +119,7 @@ def gen_base(data, noise, clusters, cls_sizes=None):
             signals = scale_complex(signals, coeffs)
 
             # mixture = noise[np.random.choice(noise.shape[0])]  # TODO restore: A mixture has its noise
-            mixture = noise[np.random.choice(noise.shape[0])]  # A mixture has its noise
+            mixture = 0.01 * noise[np.random.choice(noise.shape[0])]  # A mixture has its noise
             mixture = scale_complex(mixture, [0.0001])
             mixture = mixture + np.sum(signals, axis=0)
 
@@ -272,7 +272,7 @@ def scale_complex(data, coeffs):
     # The amplitude is the root mean square of I and Q the signal is coeff.
     data_scaled = data.copy()
     for i, (signal, coeff) in enumerate(zip(data, coeffs)):
-        signal_scaled = scale_separate_x(signal, coeff)
+        signal_scaled = scale_complex_x(signal, coeff)
         data_scaled[i] = signal_scaled
     return data_scaled
 
@@ -383,6 +383,24 @@ def proj_xy(x, y):
         raise ValueError("Projection is undefined for a zero vector y.")
     return (np.dot(x, y) / np.dot(y, y)) * y
 
+
+def max_weighted_distance(x, y, kernel = None):
+    # The two vectors are complex-valued
+    if not kernel:
+        # ker_Epanechnikov = [0.75, 0.9375, 1., 0.9375, 0.75]
+        ker_Gaussian = [0.60, 0.77, 1., 0.77, 0.60]
+        # ker_Alternative = [0.33, 0.60, 0.77, 1., 0.77, 0.60, 0.33]
+        ker = ker_Gaussian
+        # ker = ker_Alternative
+        ker = ker / np.sum(ker)
+
+    z = np.zeros(len(x))
+    w2 = int(np.floor(len(ker)/2))
+    for i in range(w2, len(x) - w2):
+        # sum of  weighted squares
+        z[i] = np.sum(np.abs(ker * (x[i-w2:i+w2+1] - y[i-w2:i+w2+1])**2))
+    dist = max(z)
+    return dist
 
 def scale_x2max(x, amp=1 + 1j):
     # The expected amplitude of the iqdata is between 0.3 and 1.2 V. Set amp to 1 V
