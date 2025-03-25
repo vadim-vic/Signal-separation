@@ -5,6 +5,7 @@ import json
 # Import the local functions, plots, and utilities
 from functions import find_shiftX_exhaust, shift, scale_complex
 from functions import gen_base, get_clusters, shift_x, is_incluster
+from functions import max_weighted_distance
 from plots import plt_clust_Xy, plt_clust_Xyy
 
 # Read the data flies and import functions
@@ -18,6 +19,15 @@ with open(f_path + f_prefix + 'noise.json') as f:
     iqnoise = np.array(json.load(f))
     iqnoise = iqnoise[:, 0, :] + 1j * iqnoise[:, 1, :]
 del f, f_path, f_prefix
+
+'''
+The code was moved back to the class Feature selection
+# The empty model is:
+mdl = {frozenset(): {'err': np.inf,  # key is the features
+                             'fea': list([]),  # features in the right order
+                             'sft': list([]),  # shift for each feature, same order
+                             'par': np.empty([])  # set of parameters for each feature
+                             }}
 
 def run(A, y, mdl, max_basis = 1, max_models = 100, max_shift = 9):
     # Exhaustive search of linear combination of columns A to approximate y
@@ -51,8 +61,11 @@ def run(A, y, mdl, max_basis = 1, max_models = 100, max_shift = 9):
                 shifts.append(best_shift)
                 # In the vector best_b the last feature corresponds to the last item
                 mdl_new.update({idx_new: {'err': err_min, 'fea': features, 'sft': shifts, 'par': best_b}})
+        # TODO choose carefully the error function before the best model selection
+        # Select the best max_models with the minimum error
         mdl = dict(sorted(mdl_new.items(), key=lambda i: i[1]['err'])[:max_models])
     return mdl
+'''
 
 class FeatureSelection:
     # Collects and analyses basis feature set to approximate unknown linear combination
@@ -69,6 +82,43 @@ class FeatureSelection:
                              'sft': list([]),  # shift for each feature, same order
                              'par': np.empty([])  # set of parameters for each feature
                              }}
+
+    def run(self, y):
+        # Exhaustive search of linear combination of columns A to approximate y
+        # A is a (m,n) matrix with n basis features of length m
+        # y is unknown linear combination of small number of features from A of length m
+        # mdl is a special format dictionary with the model parameters
+        # it contains various linear combinations an alternative to approximate
+        # max_basis in the number of features to append to the linear combination
+        # max_models restricts number of the alternative models to avoid exp growth
+        # Returns: updated mdl
+        # From the previous version: A, mdl, max_basis max_models max_shift
+        cnt_basis = 0
+        mdl_new = self.mdl.copy()
+        while cnt_basis < self.MAX_BASIS:
+            cnt_basis += 1
+            for idx in self.mdl.keys():
+                # print('Append to the indices:', idx)
+                for j in range(self.n_basis):  # Exhaustive search in the set of all features of A
+                    # Append index of a feature to the new dictionary
+                    idx_new = frozenset(set(idx) | {j})
+                    if idx_new in self.mdl: continue  # Already in the dictionary, drop it
+                    # Compute the error, parameters and add them to the dictionary values
+                    x = self.A[:, j]
+                    # Append the new feature to the existing matrix
+                    features = self.mdl[idx]['fea'].copy()
+                    shifts = self.mdl[idx]['sft'].copy()
+                    X = self.A[:, features]
+                    X = shift(X, shifts)  # Arrange the shift
+                    err_min, best_b, best_shift = find_shiftX_exhaust(X, x, y, self.MAX_SHIFT)
+                    features.append(j)
+                    shifts.append(best_shift)
+                    # In the vector best_b the last feature corresponds to the last item
+                    mdl_new.update({idx_new: {'err': err_min, 'fea': features, 'sft': shifts, 'par': best_b}})
+            # Choose carefully the error function before the best model selection
+            # self.update_error(y) # If you need an alternative error function to  select models
+            # Select the best max_models with the minimum error
+            self.mdl = dict(sorted(mdl_new.items(), key=lambda i: i[1]['err'])[:self.MAX_MODELS])
 
     def plot_mdl(self, y, max_models=None):
         # Plot all
@@ -90,6 +140,19 @@ class FeatureSelection:
     def best_model(self):
         best_mdl = min(self.mdl.items(), key=lambda i: i[1]['err'])[1]
         return best_mdl
+
+    def update_error(self, y):
+        # The Hausdorff distance is used here to replace the Euclidean error.
+        for idx in self.mdl.keys():
+            fea = self.mdl[idx]['fea']
+            sft = self.mdl[idx]['sft']
+            par = self.mdl[idx]['par']
+            X = self.A[:, fea]
+            X = shift(X, sft)
+            y1 = X @ par
+            error = max_weighted_distance(y, y1)
+            self.mdl[idx]['err'] = error
+
 # Load the basis features
 dbasis = get_clusters() # The key is the centroid index, the value is the vector of item indices
 
@@ -110,10 +173,14 @@ def next_sample_dset(dset, idx_basis):
     # Yields the next sample in the dset item every time it's called
     # The structure of the dictionary dset is in the function gen_base
     for idx in range(len(dset)):
-        answer_y = dset[idx]['data']
+        answer_y = dset[idx]['data'] # The target mixture to reconstruct
+        # The centroids indices to check the correctness of reconstruction
         answer_X = dset[idx]['basis']
+        # The same data in the indexes of the full set of basis features
         answer_A = [idx_basis.index(i) if i in idx_basis else -1 for i in answer_X]  # What if -1 happens
+        # The coefficients of mixture TODO not used
         answer_coeff = dset[idx]['coeff']
+        # The shifts of mixture TODO not used
         answer_shift = dset[idx]['shift']
         yield answer_y, answer_X, answer_A, answer_coeff, answer_shift
 next_sample = next_sample_dset(dset, idx_basis)
@@ -127,30 +194,37 @@ next_sample = next_sample_dset(dset, idx_basis)
 cnt_err = 0
 cnt_resolved = 0
 X_cls = np.empty([0,n_models * n_classes])  # objects to 4 class classification
+X_cls_haus = X_cls.copy()
 y_cls = []  # target 4 classes
 for i in range(100):
     # Get a sample from the dataset
     answer_y, answer_X, answer_A, answer_coeff, answer_shift = next(next_sample)
     fs = FeatureSelection(Abase, max_models = n_models ) # Reset the list of models
+    fs.MAX_MODELS = n_models
+    fs.MAX_BASIS = 1
+
     # Run the reconstruction procedure
     # fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis=5, max_models=6)
-
     i_dist = np.array([])
+    i_haus = np.array([])
     # For each number of collided signals
     for c in range(n_classes):
-        fs.mdl = run(fs.A, answer_y, fs.mdl, max_basis = 1,  max_models = n_models)
+        fs.run(answer_y)
         i_dist = np.hstack((i_dist, np.array([values['err'] for values in fs.mdl.values()])))
+        # Use alternative error, too
+        fs.update_error(answer_y)
+        i_haus = np.hstack((i_dist, np.array([values['err'] for values in fs.mdl.values()])))
         # print(np.shape(i_dist))
-    #if np.size(X_cls) == 0:
-    #    X_cls = np.array([i_dist])
-    #else:
+    # Make the dataset for classification
     X_cls = np.vstack((X_cls, i_dist.transpose()))
+    X_cls_haus = np.vstack((X_cls, i_haus.transpose()))
     y_cls.append(len(answer_A))
+    # construct
+
     # Plot the best model
     # fs.plot_mdl(answer_y, 1)
     # Check the quality of the reconstruction by comparing with the answer
     best_A = fs.best_model()['fea']
-
     dist = fs.best_model()['err']
     if set(answer_A) == set(best_A):
         print(i, 'errors:', dist)
@@ -163,3 +237,5 @@ for i in range(100):
         print(i, 'resolved:', len_resolved)
 print('_____________________')
 print(cnt_err , cnt_resolved)
+
+
