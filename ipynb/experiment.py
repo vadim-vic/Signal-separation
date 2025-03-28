@@ -17,7 +17,7 @@ class FeatureSelection:
         self.mdl = {frozenset(): {'err': np.inf,  # key is the features
                              'fea': list([]),  # features in the right order
                              'sft': list([]),  # shift for each feature, same order
-                             'par': np.empty([])  # set of parameters for each feature
+                             'par': np.empty([])  #   o f parameters for each feature
                              }}
 
     def run(self, y):
@@ -86,6 +86,8 @@ class FeatureSelection:
             par = self.mdl[idx]['par']
             X = self.A[:, fea]
             X = shift(X, sft)
+            if np.size(X) == 0:
+                continue
             y1 = X @ par
             error = max_weighted_distance(y, y1)
             self.mdl[idx]['err'] = error

@@ -123,7 +123,7 @@ def gen_base(data, noise, clusters, cls_sizes=None, noise_level=1):
                 cls_mix = cls
             else:
                 cls_mix = cls # just make as many components is the mixture as the position number
-                # TODO keep from earlier version: cls_mix = np.random.choice(list(range(3, MAX_MIX)))  # 3 or more signals
+                # TODO from the earlier version: cls_mix = np.random.choice(list(range(3, MAX_MIX)))  # 3 or more signals
 
             # Each transmitter sends its unique code (no identical sources)
             idx_clus = np.random.choice(list(clusters.keys()), cls_mix, replace=False)
@@ -132,13 +132,10 @@ def gen_base(data, noise, clusters, cls_sizes=None, noise_level=1):
             coeffs = np.random.uniform(MIN_AMP, MAX_AMP, size=len(idx_src))
             signals = data[idx_src]
             signals = scale_complex(signals, coeffs)
+            mixture = np.sum(signals, axis=0) # The signals is a linear combination
+            mixture = mixture + noise_level * noise[np.random.choice(noise.shape[0])]  # A mixture has its noise
 
-            # mixture = noise_level * noise[np.random.choice(noise.shape[0])]  # TODO restore: A mixture has its noise
-            mixture = noise_level * noise[np.random.choice(noise.shape[0])]  # A mixture has its noise
-            mixture = scale_complex_x(mixture, 1)
-            mixture = mixture + np.sum(signals, axis=0)
-
-            # Counting shifts from the basis vectors
+            # Fill the mixture parameters
             shifts = []
             for i, j in zip(idx_clus, idx_src):
                 x = data[i]  # Cluster as basis
@@ -150,7 +147,6 @@ def gen_base(data, noise, clusters, cls_sizes=None, noise_level=1):
             # Store all: mixture, its class, its sources, its coefficients
             dset.append({
                 "data": mixture,
-                "label": cls,
                 "basis": idx_clus,
                 "source": idx_src,
                 "coeff": coeffs,
@@ -173,4 +169,11 @@ def next_sample_dset(dset, idx_basis):
         answer_coeff = dset[idx]['coeff']
         # The shifts of mixture TODO not used
         answer_shift = dset[idx]['shift']
-        yield answer_y, answer_X, answer_A, answer_coeff, answer_shift
+        yield answer_y, answer_A, answer_X, answer_coeff, answer_shift
+
+# To get the data in easy way while setting noise, use the function
+#def get_dset(class_sizes, noise_lvl):
+#    # The arguments of the called function is in the cell visibility
+#    # We suppose they do not change during the experiment
+#    dset = gen_base(iqdata, iqnoise, dbasis, cls_sizes=class_sizes, noise_level=noise_lvl)
+#    return dset

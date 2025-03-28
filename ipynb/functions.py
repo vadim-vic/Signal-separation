@@ -270,7 +270,7 @@ def scale_x2max(x, amp=1 + 1j):
 def complex_abs(x, y):  # Ready to be obsoleted?
     # Absolute values of the residues elements of two complex vectors
     # Works with dtype=complex
-    # TODO needs additional cheking, do we need this function
+    # Note: needs additional cheking, do we need this function
     z = np.empty(x.shape, dtype=complex)
     z.real = np.abs(x.real - y.real)
     z.imag = np.abs(x.imag - y.imag)
@@ -280,7 +280,7 @@ def complex_abs(x, y):  # Ready to be obsoleted?
 # ** Distance functions
 def dist_xy(x, y):
     # Works with dtype=complex
-    # TODO remove this function due to it is obvious
+    # Note: remove this function due to it is obvious
     return np.linalg.norm(x - y)
 
 
@@ -333,6 +333,3 @@ def find_best_shift(x, y, N, is_proj=False):
     if is_proj:
         shifted_y = proj_xy(x, shifted_y)
     return shifted_y  # [best_shift, scale] as the model parameters
-
-    # TODO def collect_cluster(X, idx_centroid, idx_general, CRAD, WLEN): (from Colab 9_)
-    # TODO def find_centroid(cluster): (from Colab 9_)

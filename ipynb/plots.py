@@ -147,3 +147,25 @@ def plot_AUC(auc, accuracy, fpr, tpr):
   plt.legend(loc='lower right')
   plt.show()
   return
+
+
+def plt_lines(matrix_y, vector_x, title=''):
+  # The lines is in the columns
+  plt.rcParams['font.family'] = 'DejaVu Serif'
+  plt.rcParams['lines.linewidth'] = 2
+  # plt.rcParams['lines.markersize'] = 12
+  plt.rcParams['xtick.labelsize'] = 10  # 24
+  plt.rcParams['ytick.labelsize'] = 10  # 24
+  plt.rcParams['legend.fontsize'] = 10  # 24
+  plt.rcParams['axes.labelsize'] = 12  # 24
+
+  for c in range(matrix_y.shape[1]):
+    vector_y = matrix_y[:, c]
+    plt.plot(vector_x, vector_y, label='Mix of ' + str(c))
+  plt.xlabel('Noise level')
+  plt.ylabel('Success rate')
+  plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
+  plt.tight_layout()
+  plt.savefig('../tmp/fig_' + title + '.png', dpi=300, bbox_inches='tight')
+  plt.close()
+  plt.show()
