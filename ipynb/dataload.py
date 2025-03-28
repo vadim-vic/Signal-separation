@@ -123,7 +123,7 @@ def gen_base(data, noise, clusters, cls_sizes=None, noise_level=1):
                 cls_mix = cls
             else:
                 cls_mix = cls # just make as many components is the mixture as the position number
-                # TODO from the earlier version: cls_mix = np.random.choice(list(range(3, MAX_MIX)))  # 3 or more signals
+                # Note: from the earlier version: cls_mix = np.random.choice(list(range(3, MAX_MIX)))  # 3 or more signals
 
             # Each transmitter sends its unique code (no identical sources)
             idx_clus = np.random.choice(list(clusters.keys()), cls_mix, replace=False)
