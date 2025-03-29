@@ -34,14 +34,14 @@ class_sizes = [3, 3, 3, 3, 3, 3]  # Set sample size for each collided groups
 # Later we check the reconstructed signal with one of the cluster's signals
 # Check the reconstruction quality
 # create the table to plot
-n_noise_levels = 10 # r, rows
+n_noise_levels = 15 # r, rows
 n_classes = len(class_sizes) # c, columns
 noise_levels = np.linspace(0, 1, n_noise_levels)
 cnt_resolvedA = np.zeros((n_noise_levels, n_classes))
 cnt_resolved1 = cnt_resolvedA.copy()
 cnt_resolved2 = cnt_resolvedA.copy()
 
-n_samples = 30
+n_samples = 100
 
 for noise_level, r in zip(noise_levels, range(n_noise_levels)):
     for c in range(1,n_classes):
