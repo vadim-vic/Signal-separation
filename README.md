@@ -64,8 +64,8 @@ The second parameter is calculated as an argument of the minimum distance
 \text{shift} =\mathop{\arg\min}\|\hat{\mathbf{c}}-\mathbf{c}\|^2.
 ```
 
-![An example of the centrois](/latex/fig_cluster.png)
-* The figure shows the result of self-modeling (imaginary part). After the self-modeling regression, twelve different transmissions became similar.*
+![An example of the centrois](/latex/fig_cluster.png)<br>
+*The figure shows the result of self-modeling (imaginary part). After the self-modeling regression, twelve different transmissions became similar.*
 
 Briefly, *self-modeling unifies the signal shape* of the I/Q data. It makes it a tool to analyze the signal mixtures. 
 
