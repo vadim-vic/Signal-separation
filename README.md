@@ -17,7 +17,7 @@ So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collid
 \frac{D!}{D^N(D-N)!}.
 ```
 The figure shows that the probability of a successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is a collision even for a long inventory cycle. See the green and red lines. 
-![The probability of a collision-free inventory](/latex/pr_collision-free.png)
+![The probability of a collision-free inventory](/latex/fig_collision_free.png)
 The probability of a collision-free inventory of any of $`N`$ given $`D`$ time-slots.
 
 If, with an insufficient number of slots, there is no initial period where the probability of getting two transmitters in one slot increases. That is, if there are enough transmitters to overlap at all, they will \emph{immediately start crowding} into multiple transmissions per slot.
