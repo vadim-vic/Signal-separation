@@ -17,7 +17,7 @@ So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collid
 ```
 The figure shows that the probability of a successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is a collision even for a long inventory cycle. See the green and red lines. 
 
-![](latex/pr_collision-free.png)
+![](/latex/pr_collision-free.png)
 *The probability of collision-free inventory of any of $`N`$ given $`D`$ time-slots.*
 
 
