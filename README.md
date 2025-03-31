@@ -5,15 +5,15 @@ During inventory in a densely packed stock, multiple radio-frequency data transm
 \#RFID, \#I/Q data,  \#Aloha collision, \#Signal separation, \#Self-modeling
 
 # Table of contents for the project
-1. [Report on the signal separation](https://medium.com/p/d56a210dae9a), also see below
-2. [Run the demo of the I/Q data signal separation](/main/readme)
-3. [Report on the collision detection, pdf](/latex#CollisionDetector.pdf)
+1. [Report on the signal separation](https://medium.com/p/d56a210dae9a) 
+2. [Run the demo of the I/Q data signal separation](/main#readme)
+3. [Report on the collision detection, pdf](/latex/CollisionDetector.pdf)
 1. [Inphase-Quadratire data readme](/data#readme)
 2. [Some examples of the I/Q data signal processing](/ipynb#readme).
 3. [References and introduction to signal separation](/latex#readme).
 4. [Illustrations of the signals](/figures/#readme)
 
-# The birthday paradox
+# The birthday paradox and probability of collision-free
 The Aloha protocol resolves a mixture of replies: the inventory time-segment splits into time-slots.  At request, each tag waits a random number of time slots and replies. 
 Due to this randomness, some  time slots are left  unoccupied, some time slots keep a single tag ID, but some are still occupied by several tags.  Can we avoid collisions in one inventory cycle? The problem of estimating of probability that two tags hit one slot is called [the birthday paradox](https://dialnet.unirioja.es/descarga/articulo/5997063.pdf). What is the probability that two people have their birthdays on the same day? One tag hits any of $`D`$ slots with the probability of $`\frac{1}{D}`$. Two tags do not hit the same slot with the probability $`1-\frac{1}{D}`$. The third tag cannot hit both occupied slots, so the probability is
 ```math
@@ -32,7 +32,7 @@ If, with an insufficient number of slots, there is no initial period where the p
 Briefly, *the collision is unavoidable in one inventory cycle.*
 
 
-## Signal self-modeling
+## Inphase-Quadrature Data signal self-modeling
 The collision should be detected to avoid inventory errors. But there is no error in the signals, reconstructed after the collision. So we suppose two or more tags transmit at the same time. 
 
 ![A tag emits an ultra-high-frequency signal through its antenna](latex/EPC-RFID-TAG.svg.png)
@@ -68,7 +68,7 @@ The figure shows the result of self-modeling.
 
 Briefly, *self-modeling unifies the signal shape* of the I/Q data. It makes it a tool to analyze the signal mixtures. 
 
-# Signal separation
+# Collision does not matter for the separated signals
 When two or more tags hit the same time slot, their signals mix. Due to the various antenna orientations, they mix with different coefficients. For $`n`$ tags denote the coefficients $`[v_1, \dots, v_n]`$. The received noisy mixture $`\mathbf{y}`$ approximated the weighted I/Q data signals in the best way:
 ```math
 \mathbf{y} \approx \mathbf{p} = v_1 \mathbf{x}_1 + \dots + v_n \mathbf{x}_n = \mathbf{X}\mathbf{v}
@@ -81,13 +81,10 @@ Two or more signals mix proportionally to their attenuation. It defines the vect
 
 There is no need to use methods like *blind* signal separation. The self-modeling regression works even for a single-antenna reader. 
 
-
 ![The vector span in the space of I/Q data signals](latex/fig_mix_one.png)
 Each line is the number of successfully recognized IDs of the tags after the signal reconstruction. The x-axis shows the level of noise from the expected standard deviation to zero. The y-axis shows the proportion of recovered time slots.
 
 The figure shows that the most expected types of collision: two and three tags hit the same slot. It delivers good TODO I/Q data identity reconstruction.
-
-Briefly, \emph{collision does not matter for the reconstructed signals}. 
 
 ## Development of the I/Q data separation model
 
@@ -102,4 +99,4 @@ The further models include analysis of mixture in the high-frequency domain unde
 
 We welcome companies involved in RFID software and hardware development: if you are interested in supporting this research, please contact the author.
 
-[Version in pdf](/latex/SignalSeparation.pdf)
+[Version in pdf](latex/SignalSeparation.pdf)
