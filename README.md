@@ -2,7 +2,10 @@
 
 During inventory in a densely packed stock, multiple radio-frequency data transmitters often interfere with each other, leading to signal collisions. This reduces the efficiency of inventory. We present a method to resolve these collisions. The good news: despite these collisions, the items can still be identified, and their signals can be reconstructed. This advancement greatly enhances the performance of radio-frequency identification (RFID) systems.
 
+*The proposed model separates two collided tags with an 80% success rate, saves the slot for three collided tags with a 60% success rate, and could even save the slot for four and five collided tags.*
+
 \#RFID, \#I/Q data,  \#Aloha collision, \#Signal separation, \#Self-modeling
+
 
 # Table of contents for the project
 1. [Report on the signal separation](https://medium.com/p/d56a210dae9a) 
@@ -85,7 +88,9 @@ There is no need to use methods like *blind* signal separation. The self-modelin
 
 <img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_mix_one.png?raw=true)" alt="The success rate of collision resolution" width="585" height="435"><br>
 <!--![The success rate of collision resolution](/latex/fig_mix_one.png)-->
-Each line is the number of successfully recognized IDs of the tags after the signal reconstruction. The x-axis shows the level of noise from the expected standard deviation to zero. The y-axis shows the proportion of recovered time slots.
+*The proposed model separates two collided tags with an 80% success rate, saves the slot for three collided tags with a 60% success rate, and could even save the slot for four and five collided tags.*
+
+Each line is the success rate of successfully recognized IDs of the tags after the signal separation. The x-axis shows the level of noise from zero up to the expected standard deviation. The y-axis shows the proportion of separated time series and recognized IDs of the I/Q data.  
 
 The figure shows that the most expected types of collision: two and three tags hit the same slot. It delivers good TODO I/Q data identity reconstruction.
 
