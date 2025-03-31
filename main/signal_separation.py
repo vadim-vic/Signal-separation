@@ -1,5 +1,6 @@
-# Find the base for various number of mixture signals. Add the alternative base features sequentially.
-# Select them according to the approximation to the external error.
+# Find the base for various numbers of mixture signals. Add the alternative base features sequentially.
+# Select them according to the approximation of the external error.
+# This demo inherits the test from the file 13_Exhaustive_Base.ipynb
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -18,22 +19,22 @@ idx_Abase = list(dbasis.keys())
 Abase = iqdata[idx_Abase].transpose()
 
 # How to use the data:
-# Generate new dset with randomly mixed signals as y plus a noise of desired level
+# Generate a new dset with randomly mixed signals as y plus a noise of the desired level
 class_sizes = [3, 3, 3, 3, 3, 3]  # Set sample size for each collided groups
 # dset = gen_base(iqdata, iqnoise, dbasis, cls_sizes)
 # print(list(dset[0].keys())) # The keys in each data sample
 
 # This instance delivers a new y with answers
 # get_next_sample = next_sample_dset(dset, idx_Abase) # Use after generation new dset
-# This instance carry models for each y
+# This instance carries models for each y
 # fs = FeatureSelection(Abase) # Use after get a new y
 
 # The parameters of the computational experiment
 # n_models = 6`
 # n_classes = len(class_sizes)
-# Later we check the reconstructed signal with one of the cluster's signals
+# Later, we check the reconstructed signal with one of the cluster's signals
 # Check the reconstruction quality
-# create the table to plot
+# Create the table to plot
 n_noise_levels = 15 # r, rows
 n_classes = len(class_sizes) # c, columns
 noise_levels = np.linspace(0, 1, n_noise_levels)
