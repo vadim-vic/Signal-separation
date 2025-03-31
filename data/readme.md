@@ -10,7 +10,7 @@ The ground truth noise samples from the dataset, have mu <= 0.005 (booth, real o
 standard deviation sigma = 0.1361. The plot shows 3 sigma. This distribution function is used in
 the signal reconstruction procedure.
 ![The distribution of noise is Gaussian](../latex/fig_noise_pdf.png)
-*Noise*
+
 
 ## References
 1. [In-phase and quadrature components](https://en.wikipedia.org/wiki/In-phase_and_quadrature_components) by Wiki
