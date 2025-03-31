@@ -11,6 +11,7 @@ standard deviation sigma = 0.1361. The plot shows 3 sigma. This distribution fun
 the signal reconstruction procedure.
 ![The distribution of noise is Gaussian](../latex/fig_noise_pdf.png)
 
+
 ## References
 1. [In-phase and quadrature components](https://en.wikipedia.org/wiki/In-phase_and_quadrature_components) by Wiki
 2. [What is I/Q Data? 5G in Wireless Communication](https://www.linkedin.com/pulse/what-iq-data-in-depth-look-reference-5g-wireless-ravi-shekhar-8ypqc/) by Ravi Shekhar Singh
