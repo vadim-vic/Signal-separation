@@ -16,7 +16,7 @@ During inventory in a densely packed stock, multiple radio-frequency data transm
 3. [References and introduction to signal separation](/latex#readme).
 4. [Illustrations of the signals](/figures/#readme)
 
-# The birthday paradox and probability of collision-free
+# The birthday paradox and the probability of collision-free
 The Aloha protocol resolves a mixture of replies: the inventory time-segment splits into time-slots.  At request, each tag waits a random number of time slots and replies. 
 Due to this randomness, some  time slots are left  unoccupied, some time slots keep a single tag ID, but some are still occupied by several tags.  Can we avoid collisions in one inventory cycle? The problem of estimating of probability that two tags hit one slot is called [the birthday paradox](https://dialnet.unirioja.es/descarga/articulo/5997063.pdf). What is the probability that two people have their birthdays on the same day? One tag hits any of $`D`$ slots with the probability of $`\frac{1}{D}`$. Two tags do not hit the same slot with the probability $`1-\frac{1}{D}`$. The third tag cannot hit both occupied slots, so the probability is
 ```math
@@ -29,7 +29,7 @@ So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collid
 The figure shows that the probability of a successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is a collision even for a long inventory cycle. See the green and red lines. 
 <!-- ![The probability of a collision-free inventory](/latex/fig_collision_free.png)-->
 <img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_collision_free.png?raw=true)" alt="The probability of a collision-free inventory" width="585" height="435"><br>
-The probability of a collision-free inventory of any of $`N`$ given $`D`$ time-slots.
+The probability of a collision-free inventory of any of $`N`$ given $`D`$ time-slots. The goal is to inventory over 1,000 tags at once. Even for 250 ta,gs the probability is low. 
 
 If, with an insufficient number of slots, there is no initial period where the probability of getting two transmitters in one slot increases. That is, if there are enough transmitters to overlap at all, they will *immediately start colliding* in the slot.
 
