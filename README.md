@@ -2,7 +2,7 @@
 
 During inventory in a densely packed stock, multiple radio-frequency data transmitters often interfere with each other, leading to signal collisions. This reduces the efficiency of inventory. We present a method to resolve these collisions. The good news: despite these collisions, the items can still be identified, and their signals can be reconstructed. This advancement greatly enhances the performance of radio-frequency identification (RFID) systems.
 
-\# RFID
+\# RFID, ; I/Q data;  aloha collision; signal separation; self-modeling regression
 
 
 The Independent Component Analysis is used for signal separation, the challenge is the signal signal receiver2
