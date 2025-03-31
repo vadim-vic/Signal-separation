@@ -77,7 +77,7 @@ When two or more tags hit the same time slot, their signals mix. Due to the vari
 The columns of the matrix $`\mathbf{X}`$ are the stacked I/Q data signals. 
 The coefficients $`\mathbf{v}`$ and their number $`n`$ are unknown. But for any mixture coefficients, the signals of collided tags are in the subspace of the space of the matrix $`\mathbf{X}`$. Using the self-regression model, find the source signals as the nearest linear combination to the received mixture.
 
-<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_LSProj_hand.png?raw=true)" alt="The vector span in the space of I/Q data signals" width="585" height="435"><br>
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_LSProj_hand.png?raw=true)" alt="The vector span in the space of I/Q data signals" width="585" height="300"><br>
 <!-- ![The vector span in the space of I/Q data signals](/latex/fig_LSProj_hand.png) -->
 Two or more signals mix proportionally to their attenuation. It defines the vector span in the space of I/Q data signals. The vector $`\mathbf{v}`$ is the weights of the linear combinations of the signals. The vector $`\mathbf{p}`$ is the orthogonal projection to the span $`\mathbf{X}\mathbf{v}`$. The vector $`\mathbf{y}`$ is the mixture of signals and the added noise to be reconstructed. The basis of $`P`$ is independent (the transmitters can not send the same data), I/Q data signals $`\mathbf{x}_1,\ldots,\mathbf{x}_P`$ form the matrix $`\mathbf{X}=[\mathbf{x}_1,\ldots,\mathbf{x}_P]`$ as its columns.
 
