@@ -1,3 +1,9 @@
 # I/Q signal reconstruction
 
-No matter the collision, the transmitters could be identified and data could be restored
+No matter the collision, the transmitters could be identified, and data could be restored
+
+Run the short demo in [signal-reconstruction.py](signal-reconstruction.py) or in [.ipynb](signal-reconstruction.ipynb). The modules *.functions.py*, *datagen.py*, *experiment.py*, and *plots.py* in their minimum versions are uploaded.
+
+The figure shows the received signal (blue), the reconstructed mixture (red), and the separated I/Q data signals to use as identifiers of tags in the inventory process. There are five signals in the separated mixture.
+
+![The received signal, the reconstructed signal and the origins](../figures/fig_mixture_of_5.png)
