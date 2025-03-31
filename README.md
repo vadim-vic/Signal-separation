@@ -35,17 +35,17 @@ Briefly, *the collision is unavoidable in one inventory cycle.*
 ## Inphase-Quadrature Data signal self-modeling
 The collision should be detected to avoid inventory errors. But there is no error in the signals, reconstructed after the collision. So we suppose two or more tags transmit at the same time. 
 
-![A tag emits an ultra-high-frequency signal through its antenna](latex/EPC-RFID-TAG.svg.png)
+![A tag emits an ultra-high-frequency signal through its antenna](/latex/EPC-RFID-TAG.svg.png)
 *A tag emits an ultra-high-frequency signal through its antenna.*
 
 The inventory reader decodes the high-frequency signal into the [In-phase/Quadrature data](https://en.wikipedia.org/wiki/In-phase_and_quadrature_components#I/Q_data) signal (I/Q). This signal carries two time series, real and imaginary. Denote these time series by $`\mathbf{x}`$, a vector in the complex space. 
 
 Since the tags are located in different parts of the shopping cart, their signal is varied by phase and amplitude. The figure shows the same signal with the phase and amplitude modifications. The self-regression model approximates these signals with only two parameters: scale and shift.
 
-![The self-modeling regression regresses the first signal to the second](latex/fig_amplitude_scaled_distance.png)
+![The self-modeling regression regresses the first signal to the second](/latex/fig_amplitude_scaled_distance.png)
 *The self-model regresses the first signal to the second. The legend shows the real and imaginary parts of the complex signal.*
 
-![It shifts the phase of the whole I/Q data signal to find the best fit](latex/fig_centroid_still_in_cluster.png)
+![It shifts the phase of the whole I/Q data signal to find the best fit](/latex/fig_centroid_still_in_cluster.png)
 *It shifts the phase of the whole I/Q data signal to find the best fit.*
 
 The self-modeling regression approximates the signal $`\mathbf{x}`$ with the standard signal$`\mathbf{c}`$ (call it the centroid) as
@@ -63,7 +63,7 @@ The second parameter is calculated as an argument of the minimum distance
 ```
 
 The figure shows the result of self-modeling.
-![An example of the centrois](latex/fig_cluster.png)
+![An example of the centrois](/latex/fig_cluster.png)
 *After the self-modeling regression, twelve different transmissions became similar (imaginary part is shown).*
 
 Briefly, *self-modeling unifies the signal shape* of the I/Q data. It makes it a tool to analyze the signal mixtures. 
@@ -76,20 +76,21 @@ When two or more tags hit the same time slot, their signals mix. Due to the vari
 The columns of the matrix $`\mathbf{X}`$ are the stacked I/Q data signals. 
 The coefficients $`\mathbf{v}`$ and their number $`n`$ are unknown. But for any mixture coefficients, the signals of collided tags are in the subspace of the space of the matrix $`\mathbf{X}`$. Using the self-regression model, find the source signals as the nearest linear combination to the received mixture.
 
-![The vector span in the space of I/Q data signals](latex/fig_LSProj_hand.png)
+![The vector span in the space of I/Q data signals](/latex/fig_LSProj_hand.png)
 Two or more signals mix proportionally to their attenuation. It defines the vector span in the space of I/Q data signals. The vector $`\mathbf{v}`$ is the weights of the linear combinations of the signals. The vector $`\mathbf{p}`$ is the orthogonal projection to the span $`\mathbf{X}\mathbf{v}`$. The vector $`\mathbf{y}`$ is the mixture of signals and the added noise to be reconstructed. The basis of $`P`$ is independent (the transmitters can not send the same data), I/Q data signals $`\mathbf{x}_1,\ldots,\mathbf{x}_P`$ form the matrix $`\mathbf{X}=[\mathbf{x}_1,\ldots,\mathbf{x}_P]`$ as its columns.
 
 There is no need to use methods like *blind* signal separation. The self-modeling regression works even for a single-antenna reader. 
 
-![The vector span in the space of I/Q data signals](latex/fig_mix_one.png)
+![The vector span in the space of I/Q data signals](/latex/fig_mix_one.png)
 Each line is the number of successfully recognized IDs of the tags after the signal reconstruction. The x-axis shows the level of noise from the expected standard deviation to zero. The y-axis shows the proportion of recovered time slots.
 
 The figure shows that the most expected types of collision: two and three tags hit the same slot. It delivers good TODO I/Q data identity reconstruction.
 
 ## Development of the I/Q data separation model
 
-1. Run the code and report on the collision reconstruction: \href{https://github.com/vadim-vic/Signal-separation}{https://github.com/vadim-vic/Signal-separation}
-2. Read the report on the collision detection: \href{https://github.com/vadim-vic/Signal-separation/blob/main/latex/CollisionDetector.pdf}{the report on the collision detection}
+1. [Run the demo code on the collision reconstruction](/main#readme)
+2. [Read the report on the collision detection](/latex/CollisionDetector.pdf)
+3. [Share this report in PDF](/latex/SignalSeparation.pdf)
 
 Though the developed model is portable to an RFID reader, there are ways to improve the signal separation. Their origins are published in our papers:
 1. [Comprehensive study of feature selection methods to solve multicollinearity problem](https://doi.org/10.1016/j.eswa.2017.01.048) // Expert Systems with Application, 2017
@@ -99,4 +100,4 @@ The further models include analysis of mixture in the high-frequency domain unde
 
 We welcome companies involved in RFID software and hardware development: if you are interested in supporting this research, please contact the author.
 
-[Version in pdf](latex/SignalSeparation.pdf)
+
