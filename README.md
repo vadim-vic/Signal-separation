@@ -4,14 +4,17 @@ During inventory in a densely packed stock, multiple radio-frequency data transm
 
 \# RFID, I/Q data,  Aloha collision, Signal separation, Self-modeling regression
 
-The Aloha protocol addresses the issue of overlapping replies by dividing the inventory time segment into discrete time slots. When prompted, each tag waits for a random number of time slots before responding. Due to this randomness, some time slots remain unoccupied, some contain only a single tag ID, while others may still be occupied by multiple tags. The Aloha protocol resolve mixture of replies: the inventory time-segment splits into time-slots. At request each tag waits a random number of time slots and reply. Due this randomness, some  time slots left  unoccupied, some time slots keep a single tad ID, but some still occupied by several tags. Can we avoid collisions in one inventory cycle? The problem of estimation of probability that two tags hit one slot is called \emph{the birthday paradox}~\cite{Santos2015,Mosteller1962}. What is probability of a two people have their birthdays in the same day? One tag hits any of~$D$ slots with the probability of~$\frac{1}{D}$. Two tags do not hit the same slot with the probability~$1-\frac{1}{D}$. The third tag cannot hit the both occupied slots so the probability is
-\[
+
+
+The Aloha protocol resolves a mixture of replies: the inventory time-segment splits into time-slots.  At request, each tag waits a random number of time slots and replies. 
+Due to this randomness, some  time slots are left  unoccupied, some time slots keep a single tag ID, but some are still occupied by several tags.  Can we avoid collisions in one inventory cycle? The problem of estimation of probability that two tags hit one slot is called [the birthday paradox](https://dialnet.unirioja.es/descarga/articulo/5997063.pdf). What is the probability that two people have their birthdays on the same day? One tag hits any of $`D`$ slots with the probability of $`\frac{1}{D}`$. Two tags do not hit the same slot with the probability $`1-\frac{1}{D}`$. The third tag cannot hit both occupied slots, so the probability is\
+$$
 \frac{D-1}{D} \frac{D-2}{D} = \left(1-\frac{1}{D}\right) \left(1- \frac{2}{D}\right).
-\] 
-So for given~$D$ slots,  the probability that none of~$N$ tags do not collide is
-\[
+$$ 
+So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collide is\
+$$
 \frac{D!}{D^N(D-N)!}.
-\] 
+$$ 
 Figure~\ref{fig:pr_collision-free} shows that the probability of successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is collision even for a long inventory cycle. See the green and red lines. 
 
 
