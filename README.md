@@ -90,9 +90,7 @@ There is no need to use methods like *blind* signal separation. The self-modelin
 <!--![The success rate of collision resolution](/latex/fig_mix_one.png)-->
 *The proposed model separates two collided tags with an 80% success rate, saves the slot for three collided tags with a 60% success rate, and could even save the slot for four and five collided tags.*
 
-Each line is the success rate of successfully recognized IDs of the tags after the signal separation. The x-axis shows the level of noise from zero up to the expected standard deviation. The y-axis shows the proportion of separated time series and recognized IDs of the I/Q data.  
-
-The figure shows that the most expected types of collision: two and three tags hit the same slot. It delivers good TODO I/Q data identity reconstruction.
+The figure shows that the most expected types of collision: two and three tags hit the same slot. It delivers great I/Q data identity reconstruction. Each line is the success rate of successfully recognized IDs of the tags after the signal separation. The x-axis shows the level of noise from zero up to the expected standard deviation. The y-axis shows the proportion of separated time series and recognized IDs of the I/Q data.  
 
 ## Development of the I/Q data separation model
 
