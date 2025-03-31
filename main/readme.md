@@ -7,3 +7,5 @@ Run the short demo in [signal-reconstruction.py](signal_separation.py). The modu
 The figure shows the received signal (red), the reconstructed mixture (black), and the separated I/Q data signals to use as identifiers of tags in the inventory process. There are five signals in the separated mixture. 
 
 ![The received signal, the reconstructed signal and the origins](../figures/fig_mixture_of_5.png)
+
+[See more signal separation examples in figures](../figures#readme).
