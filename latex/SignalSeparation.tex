@@ -34,9 +34,10 @@
 %\author{Vadim Strizhov}%\footnote{E-mail: vadim.vct@gmail.com}}
 
 \begin{quote}
-During inventory in a densely packed stock, multiple radio-frequency data transmitters often interfere with each other, leading to signal collisions. This reduces the efficiency of inventory. We present a method to resolve these collisions. The good news: despite these collisions, the items can still be identified, and their signals can be reconstructed. This advancement greatly enhances the performance of radio-frequency identification (RFID) systems.
+During inventory in a densely packed stock, multiple radio-frequency data transmitters often interfere with each other, leading to signal collisions. This reduces the efficiency of inventory. We present a method to resolve these collisions. The good news: despite these collisions, the items can still be identified, and their signals can be reconstructed. This advancement greatly enhances the performance of radio-frequency identification (RFID) systems.\footnote{Vadim Strizhov, \href{mailto:vadim.vct@gmail.com}{\texttt{vadim.vct@gmail.com}}, 18/03/2025}
+
+\emph{The proposed model separates two collided tags with an 80\% success rate, saves the slot for three collided tags with a 60\% success rate, and could even save the transmission slot for four and five collided tags.}
 %During the inventory of a crowded stock, multiple radio-frequency data transmitters often collide. It reduced number of goods in the stock to make fast inventory. We describe ways to resolve these collisions. The good news: no matter the collision, the goods could be identified. The signals could be reconstructed. It significantly ameliorates the radio-frequency identification systems.
-\footnote{Vadim Strizhov, \href{mailto:vadim.vct@gmail.com}{\texttt{vadim.vct@gmail.com}}, 18/03/2025}
 
 \bigskip
 \noindent \textbf{Keywords:} RFID; I/Q data;  aloha collision; signal separation; self-modeling regression
@@ -147,7 +148,7 @@ The coefficients~$\mathbf{v}$ and their number~$n$ are unknown. But for any mixt
 \end{figure}
 There is no need to use methods like blind signal separation. The self-modeling regression works even for a single-antenna reader. 
 
-Figure~\ref{fig:separation} shows that the most expected types of collision: from two to five three tags hit the same slot. It delivers great I/Q data identity reconstruction.
+Figure~\ref{fig:separation} shows that the most expected types of collision: from two to five three tags hit the same slot. It delivers great I/Q data identity reconstruction. The proposed model separates two collided tags with an 80\% success rate, saves the slot for three collided tags with a 60\% success rate, and could even save the transmission slot for four and five collided tags.
 
 %Briefly, \emph{collision does not matter for the separated signals}. 
 
