@@ -25,7 +25,7 @@ So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collid
 ```
 The figure shows that the probability of a successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is a collision even for a long inventory cycle. See the green and red lines. 
 <!-- ![The probability of a collision-free inventory](/latex/fig_collision_free.png)-->
-<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_collision_free.png?raw=true)" alt="The probability of a collision-free inventory" width="400" height="200"><br>
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_collision_free.png?raw=true)" alt="The probability of a collision-free inventory" width="585" height="435"><br>
 The probability of a collision-free inventory of any of $`N`$ given $`D`$ time-slots.
 
 If, with an insufficient number of slots, there is no initial period where the probability of getting two transmitters in one slot increases. That is, if there are enough transmitters to overlap at all, they will *immediately start colliding* in the slot.
@@ -37,7 +37,7 @@ Briefly, *the collision is unavoidable in one inventory cycle.*
 The collision should be detected to avoid inventory errors. But there is no error in the signals, reconstructed after the collision. So we suppose two or more tags transmit at the same time. 
 
 <!-- ![A tag emits an ultra-high-frequency signal through its antenna](/latex/EPC-RFID-TAG.svg.png)-->
-<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/EPC-RFID-TAG.svg.png?raw=true)" alt="A tag emits an ultra-high-frequency signal through its antenna" width="200" height="120"><br>
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/EPC-RFID-TAG.svg.png?raw=true)" alt="A tag emits an ultra-high-frequency signal through its antenna" width="220" height="140"><br>
 *A tag emits an ultra-high-frequency signal through its antenna.*
 
 The inventory reader decodes the high-frequency signal into the [In-phase/Quadrature data](https://en.wikipedia.org/wiki/In-phase_and_quadrature_components#I/Q_data) signal (I/Q). This signal carries two time series, real and imaginary. Denote these time series by $`\mathbf{x}`$, a vector in the complex space. 
@@ -78,12 +78,14 @@ When two or more tags hit the same time slot, their signals mix. Due to the vari
 The columns of the matrix $`\mathbf{X}`$ are the stacked I/Q data signals. 
 The coefficients $`\mathbf{v}`$ and their number $`n`$ are unknown. But for any mixture coefficients, the signals of collided tags are in the subspace of the space of the matrix $`\mathbf{X}`$. Using the self-regression model, find the source signals as the nearest linear combination to the received mixture.
 
-![The vector span in the space of I/Q data signals](/latex/fig_LSProj_hand.png)
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_LSProj_hand?raw=true)" alt="The vector span in the space of I/Q data signals" width="585" height="435"><br>
+<!-- ![The vector span in the space of I/Q data signals](/latex/fig_LSProj_hand.png) -->
 Two or more signals mix proportionally to their attenuation. It defines the vector span in the space of I/Q data signals. The vector $`\mathbf{v}`$ is the weights of the linear combinations of the signals. The vector $`\mathbf{p}`$ is the orthogonal projection to the span $`\mathbf{X}\mathbf{v}`$. The vector $`\mathbf{y}`$ is the mixture of signals and the added noise to be reconstructed. The basis of $`P`$ is independent (the transmitters can not send the same data), I/Q data signals $`\mathbf{x}_1,\ldots,\mathbf{x}_P`$ form the matrix $`\mathbf{X}=[\mathbf{x}_1,\ldots,\mathbf{x}_P]`$ as its columns.
 
 There is no need to use methods like *blind* signal separation. The self-modeling regression works even for a single-antenna reader. 
 
-![The vector span in the space of I/Q data signals](/latex/fig_mix_one.png)
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_mix_one.png?raw=true)" alt="The success rate of collision resolution" width="585" height="435"><br>
+<!--![The success rate of collision resolution](/latex/fig_mix_one.png)-->
 Each line is the number of successfully recognized IDs of the tags after the signal reconstruction. The x-axis shows the level of noise from the expected standard deviation to zero. The y-axis shows the proportion of recovered time slots.
 
 The figure shows that the most expected types of collision: two and three tags hit the same slot. It delivers good TODO I/Q data identity reconstruction.
