@@ -1,11 +1,12 @@
-# # Signal reconstruction
+# Signal separation
 
 During inventory in a densely packed stock, multiple radio-frequency data transmitters often interfere with each other, leading to signal collisions. This reduces the efficiency of inventory. We present a method to resolve these collisions. The good news: despite these collisions, the items can still be identified, and their signals can be reconstructed. This advancement greatly enhances the performance of radio-frequency identification (RFID) systems.
 
-\# RFID, I/Q data,  Aloha collision, Signal separation, Self-modeling regression
+\#RFID, \#I/Q data,  \#Aloha collision, \#Signal separation, \#Self-modeling
 
+# Table of contents
 
-
+# The birthday paradox
 The Aloha protocol resolves a mixture of replies: the inventory time-segment splits into time-slots.  At request, each tag waits a random number of time slots and replies. 
 Due to this randomness, some  time slots are left  unoccupied, some time slots keep a single tag ID, but some are still occupied by several tags.  Can we avoid collisions in one inventory cycle? The problem of estimation of probability that two tags hit one slot is called [the birthday paradox](https://dialnet.unirioja.es/descarga/articulo/5997063.pdf). What is the probability that two people have their birthdays on the same day? One tag hits any of $`D`$ slots with the probability of $`\frac{1}{D}`$. Two tags do not hit the same slot with the probability $`1-\frac{1}{D}`$. The third tag cannot hit both occupied slots, so the probability is
 ```math
@@ -16,16 +17,17 @@ So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collid
 \frac{D!}{D^N(D-N)!}.
 ```
 The figure shows that the probability of a successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is a collision even for a long inventory cycle. See the green and red lines. 
+![The probability of a collision-free inventory](/latex/pr_collision-free.png)
+The probability of a collision-free inventory of any of $`N`$ given $`D`$ time-slots.
 
-![](/latex/pr_collision-free.png)
-*The probability of collision-free inventory of any of $`N`$ given $`D`$ time-slots.*
+If, with an insufficient number of slots, there is no initial period where the probability of getting two transmitters in one slot increases. That is, if there are enough transmitters to overlap at all, they will \emph{immediately start crowding} into multiple transmissions per slot.
+
+Briefly, *the collision is unavoidable in one inventory cycle.*
 
 
 
 
-
-
-The Independent Component Analysis is used for signal separation, the challenge is the signal signal receiver2
+The Independent Component Analysis is used for signal separation, the challenge is the signal receiver2
 
 1. [The Aloha RFID collision detection classifier model description](latex/CollisionDetector.pdf), Feb 7
 2. [Two-class Aloha collision detection with RBF and Logistic Regression](ipynb/AlohaCollisionDetector2class_Feb7.ipynb), Feb 7
