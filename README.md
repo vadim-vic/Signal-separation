@@ -25,6 +25,36 @@ If, with an insufficient number of slots, there is no initial period where the p
 Briefly, *the collision is unavoidable in one inventory cycle.*
 
 
+## Signal self-modeling
+The collision should be detected to avoid inventory errors. But there is no error in the signals, reconstructed after the collision. So we suppose two or more tags transmit at the same time. 
+
+![A tag emits an ultra-high-frequency signal through its antenna](latex/EPC-RFID-TAG.svg.png)
+*A tag emits an ultra-high-frequency signal through its antenna.*
+
+The inventory reader decodes the high-frequency signal into the I/Q data signal (In-phase/Quadrature). This signal carries two time series, real and imaginary. Denote these time series by $`\mathbf{x}`$, a vector in the complex space. 
+
+Since the tags are located in different parts of the shopping cart, their signal is varied by phase and amplitude. Figure~\ref{fig:projected_shift} shows the same signal with the phase and amplitude modifications. The self-regression model approximates these signals with only two parameters: scale and shift.
+
+![The self-modeling regression regresses the first signal to the second](latex/fig_amplitude_scaled_distance.png)
+*The self-model regresses the first signal to the second. The legend shows the real and imaginary parts of the complex signal.*
+
+![It shifts the phase of the whole I/Q data signal to find the best fit](latex/fig_centroid_still_in_cluster.png)
+*It shifts the phase of the whole I/Q data signal to find the best fit.*
+
+The self-modeling regression approximates the signal`$\mathbf{x}`$ with the standard signal$`\mathbf{c}`$ (call it the centroid) as
+```math
+\hat{\mathbf{c}} = \text{scale} \cdot \bigl( \text{shift}(\mathbf{x})\bigr),
+```
+with two scalar parameters: scale and shift. The first parameter is calculated as the dot product ratio of the projection 
+```math
+\text{scale}\cdot \mathbf{x} = \frac{\mathbf{c}^\mathsf{T}\mathbf{x}}{\|\mathbf{c}\|^2}\mathbf{c}.
+```
+<!--%Note that this ratio could be negative, which is an admissible operation for the I/Q data signal-->
+The second parameter is calculated as an argument of the minimum distance
+```math
+\text{shift} =\mathop{\arg\min}\|\hat{\mathbf{c}}-\mathbf{c}\|^2.
+```
+
 
 
 The Independent Component Analysis is used for signal separation, the challenge is the signal receiver2
