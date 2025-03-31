@@ -11,13 +11,13 @@ Due to this randomness, some  time slots are left  unoccupied, some time slots k
 ```math
 \frac{D-1}{D} \frac{D-2}{D} = \left(1-\frac{1}{D}\right) \left(1- \frac{2}{D}\right).
 ```
-So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collide is\
+So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collide is
 ```math
 \frac{D!}{D^N(D-N)!}.
 ```
 The figure shows that the probability of a successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is a collision even for a long inventory cycle. See the green and red lines. 
 
-![](latex/pr_collision-free)
+![](latex/pr_collision-free.png)
 *The probability of collision-free inventory of any of $`N`$ given $`D`$ time-slots.*
 
 
