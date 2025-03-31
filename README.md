@@ -70,8 +70,7 @@ The columns of the matrix $`\mathbf{X}`$ are the stacked I/Q data signals.
 The coefficients $`\mathbf{v}`$ and their number $`n`$ are unknown. But for any mixture coefficients, the signals of collided tags are in the subspace of the space of the matrix $`\mathbf{X}`$. Using the self-regression model, find the source signals as the nearest linear combination to the received mixture.
 
 ![The vector span in the space of I/Q data signals](latex/fig_LSProj_hand.png)
-Two or more signals mix proportionally to their attenuation. It defines the vector span in the space of I/Q data signals. The vector $`\mathbf{v}`$ is the weights of the linear combinations of the signals. The vector $`\mathbf{p}`$ is the orthogonal projection to the span $`\mathbf{X}\mathbf{v}`$. The vector $`\mathbf{y}`$ is the mixture of signals and the added noise to be reconstructed. The basis of $`P`$ is independent (the transmitters can not send the same data) I/Q data 
-signals $`\mathbf{x}_1,\ldots,\mathbf{x}_P`$ form the matrix $`\mathbf{X}=[\mathbf{x}_1,\ldots,\mathbf{x}_P]`$ as its columns.
+Two or more signals mix proportionally to their attenuation. It defines the vector span in the space of I/Q data signals. The vector $`\mathbf{v}`$ is the weights of the linear combinations of the signals. The vector $`\mathbf{p}`$ is the orthogonal projection to the span $`\mathbf{X}\mathbf{v}`$. The vector $`\mathbf{y}`$ is the mixture of signals and the added noise to be reconstructed. The basis of $`P`$ is independent (the transmitters can not send the same data), I/Q data signals $`\mathbf{x}_1,\ldots,\mathbf{x}_P`$ form the matrix $`\mathbf{X}=[\mathbf{x}_1,\ldots,\mathbf{x}_P]`$ as its columns.
 
 There is no need to use methods like *blind* signal separation. The self-modeling regression works even for a single-antenna reader. 
 
@@ -86,7 +85,7 @@ Briefly, \emph{collision does not matter for the reconstructed signals}.
 ## Development of the I/Q data separation model
 
 1. Run the code and report on the collision reconstruction: \href{https://github.com/vadim-vic/Signal-separation}{https://github.com/vadim-vic/Signal-separation}
-2. Read the report on the collision detection: \href{https://github.com/vadim-vic/Signal-separation/blob/main/latex/CollisionDetector.pdf}{https://github.com/vadim-vic/Signal-separation/blob/main/latex/CollisionDetector.pdf}
+2. Read the report on the collision detection: \href{https://github.com/vadim-vic/Signal-separation/blob/main/latex/CollisionDetector.pdf}{the report on the collision detection}
 
 Though the developed model is portable to an RFID reader, there are ways to improve the signal separation. Their origins are published in our papers:
 1. [Comprehensive study of feature selection methods to solve multicollinearity problem](https://doi.org/10.1016/j.eswa.2017.01.048) // Expert Systems with Application, 2017
@@ -94,4 +93,4 @@ Though the developed model is portable to an RFID reader, there are ways to impr
 
 The further models include analysis of mixture in the high-frequency domain under signal interference conditions.
 
-We welcome the company involved to RFID software and hardware development: if you are interested in supporting this research or joining a SBIR NSF grant application, please contact the author.
+We welcome companies involved in RFID software and hardware development: if you are interested in supporting this research, please contact the author.
