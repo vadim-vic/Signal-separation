@@ -4,11 +4,18 @@ During inventory in a densely packed stock, multiple radio-frequency data transm
 
 \#RFID, \#I/Q data,  \#Aloha collision, \#Signal separation, \#Self-modeling
 
-# Table of contents
+# Table of contents for the project
+1. [Report on the signal separation](https://medium.com/p/d56a210dae9a), also see below
+2. [Run the demo of the I/Q data signal separation](/main/readme)
+3. [Report on the collision detection, pdf](/latex#CollisionDetector.pdf)
+1. [Inphase-Quadratire data readme](/data#readme)
+2. [Some examples of the I/Q data signal processing](/ipynb#readme).
+3. [References and introduction to signal separation](/latex#readme).
+4. [Illustrations of the signals](/figures/#readme)
 
 # The birthday paradox
 The Aloha protocol resolves a mixture of replies: the inventory time-segment splits into time-slots.  At request, each tag waits a random number of time slots and replies. 
-Due to this randomness, some  time slots are left  unoccupied, some time slots keep a single tag ID, but some are still occupied by several tags.  Can we avoid collisions in one inventory cycle? The problem of estimation of probability that two tags hit one slot is called [the birthday paradox](https://dialnet.unirioja.es/descarga/articulo/5997063.pdf). What is the probability that two people have their birthdays on the same day? One tag hits any of $`D`$ slots with the probability of $`\frac{1}{D}`$. Two tags do not hit the same slot with the probability $`1-\frac{1}{D}`$. The third tag cannot hit both occupied slots, so the probability is
+Due to this randomness, some  time slots are left  unoccupied, some time slots keep a single tag ID, but some are still occupied by several tags.  Can we avoid collisions in one inventory cycle? The problem of estimating of probability that two tags hit one slot is called [the birthday paradox](https://dialnet.unirioja.es/descarga/articulo/5997063.pdf). What is the probability that two people have their birthdays on the same day? One tag hits any of $`D`$ slots with the probability of $`\frac{1}{D}`$. Two tags do not hit the same slot with the probability $`1-\frac{1}{D}`$. The third tag cannot hit both occupied slots, so the probability is
 ```math
 \frac{D-1}{D} \frac{D-2}{D} = \left(1-\frac{1}{D}\right) \left(1- \frac{2}{D}\right).
 ```
@@ -94,3 +101,5 @@ Though the developed model is portable to an RFID reader, there are ways to impr
 The further models include analysis of mixture in the high-frequency domain under signal interference conditions.
 
 We welcome companies involved in RFID software and hardware development: if you are interested in supporting this research, please contact the author.
+
+[Version in pdf](/latex/SignalSeparation.pdf)
