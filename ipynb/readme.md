@@ -9,6 +9,7 @@ This list of the Google Colab notebooks loads two data files. Take a look at the
 - Find the centroids of the signal clusters, [9](9_Distance_to_6bit.ipynb)
 - Two-class Aloha collision detector, early draft, [ACD2](AlohaCollisionDetector2class_Feb7.ipynb)
 - Four-class Aloha collision detector, early draft, [ACD](AlohaCollisionDetector.ipynb)
+- Three approaches to the signal processing, regression and SSA: [1](1_SimpleRegression.ipynb), [5](5_SSAfeatures1series.ipynb), [8](8_PipelineToFeatureCollection.ipynb)
 - Dictionary of models to approximate the mixed signal, [14](14_Base_Exhaustive_Search.ipynb)
 - Test the reconstruction for various noise levels and number of mixed signals [13](13_Exhaustive_Base.ipynb)
 - For two time series define use a modification of the Hausdorff metric [15](15_Hausdorf_distance_clustering.ipynb)
