@@ -24,7 +24,8 @@ So for given~$`D`$ slots,  the probability that none of~$`N`$ tags do not collid
 \frac{D!}{D^N(D-N)!}.
 ```
 The figure shows that the probability of a successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is a collision even for a long inventory cycle. See the green and red lines. 
-![The probability of a collision-free inventory](/latex/fig_collision_free.png)
+<!-- ![The probability of a collision-free inventory](/latex/fig_collision_free.png)-->
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/fig_collision_free.png?raw=true)" alt="The probability of a collision-free inventory" width="400" height="200"><br>
 The probability of a collision-free inventory of any of $`N`$ given $`D`$ time-slots.
 
 If, with an insufficient number of slots, there is no initial period where the probability of getting two transmitters in one slot increases. That is, if there are enough transmitters to overlap at all, they will *immediately start colliding* in the slot.
@@ -35,7 +36,8 @@ Briefly, *the collision is unavoidable in one inventory cycle.*
 ## Inphase-Quadrature Data signal self-modeling
 The collision should be detected to avoid inventory errors. But there is no error in the signals, reconstructed after the collision. So we suppose two or more tags transmit at the same time. 
 
-![A tag emits an ultra-high-frequency signal through its antenna](/latex/EPC-RFID-TAG.svg.png)
+<!-- ![A tag emits an ultra-high-frequency signal through its antenna](/latex/EPC-RFID-TAG.svg.png)-->
+<img src="https://github.com/vadim-vic/Signal-separation/blob/main/latex/EPC-RFID-TAG.svg.png?raw=true)" alt="A tag emits an ultra-high-frequency signal through its antenna" width="200" height="120"><br>
 *A tag emits an ultra-high-frequency signal through its antenna.*
 
 The inventory reader decodes the high-frequency signal into the [In-phase/Quadrature data](https://en.wikipedia.org/wiki/In-phase_and_quadrature_components#I/Q_data) signal (I/Q). This signal carries two time series, real and imaginary. Denote these time series by $`\mathbf{x}`$, a vector in the complex space. 
