@@ -44,10 +44,10 @@ The inventory reader decodes the high-frequency signal into the [In-phase/Quadra
 
 Since the tags are located in different parts of the shopping cart, their signal is varied by phase and amplitude. The figure shows the same signal with the phase and amplitude modifications. The self-regression model approximates these signals with only two parameters: scale and shift.
 
-![The self-modeling regression regresses the first signal to the second](/latex/fig_amplitude_scaled_distance.png)
+![The self-modeling regression regresses the first signal to the second](/latex/fig_amplitude_scaled_distance.png)<br>
 *The self-model regresses the first signal to the second. The legend shows the real and imaginary parts of the complex signal.*
 
-![It shifts the phase of the whole I/Q data signal to find the best fit](/latex/fig_centroid_still_in_cluster.png)
+![It shifts the phase of the whole I/Q data signal to find the best fit](/latex/fig_centroid_still_in_cluster.png)<br>
 *It shifts the phase of the whole I/Q data signal to find the best fit.*
 
 The self-modeling regression approximates the signal $`\mathbf{x}`$ with the standard signal$`\mathbf{c}`$ (call it the centroid) as
@@ -64,9 +64,8 @@ The second parameter is calculated as an argument of the minimum distance
 \text{shift} =\mathop{\arg\min}\|\hat{\mathbf{c}}-\mathbf{c}\|^2.
 ```
 
-The figure shows the result of self-modeling.
 ![An example of the centrois](/latex/fig_cluster.png)
-*After the self-modeling regression, twelve different transmissions became similar (imaginary part is shown).*
+* The figure shows the result of self-modeling (imaginary part). After the self-modeling regression, twelve different transmissions became similar.*
 
 Briefly, *self-modeling unifies the signal shape* of the I/Q data. It makes it a tool to analyze the signal mixtures. 
 
