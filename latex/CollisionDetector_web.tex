@@ -19,11 +19,17 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{subcaption}
-\usepackage{latexsym}
+%\usepackage{latexsym}
+
+%\newcommand{\bX}{\mathbf{X}}
+%\newcommand{\bv}{\mathbf{v}
+%\newcommand{\bp}{\mathbf{p}}
+%\newcommand{\by}{\mathbf{y}}
+%\newcommand{\beps}{\boldsymbol{\epsilon}}
 
 \begin{document}
 \begin{center}
-{\Huge\bf Collided birthdays are welcome!} % Signal separation
+{\Huge\bf Collision-free RFID stock inventory}% Collided birthdays are welcome!} % Signal separation
 \end{center}
 %\author{Vadim Strizhov}%\footnote{E-mail: vadim.vct@gmail.com}}
 
@@ -37,7 +43,7 @@ During inventory in a densely packed stock, multiple radio-frequency data transm
 \bigskip
 \end{quote}
 
-\section{Collision-free inventory}
+\section{The probability of collision-free inventory}
 
 The Aloha protocol addresses the issue of overlapping replies by dividing the inventory time segment into discrete time slots. When prompted, each tag waits for a random number of time slots before responding. Due to this randomness, some time slots remain unoccupied, some contain only a single tag ID, while others may still be occupied by multiple tags.
 \begin{wrapfigure}{r}{0.3\textwidth}  %
@@ -60,7 +66,7 @@ So for given~$D$ slots,  the probability that none of~$N$ tags do not collide is
 Figure~\ref{fig:pr_collision-free} shows that the probability of successful inventory is small for any reasonable number of tags. So if the shopping cart has over 100 items with tags, most likely there is collision even for a long inventory cycle. See the green and red lines. 
 \begin{figure}[!tb]
 \centering
-\includegraphics[width=0.6\textwidth]{fig_collision_free}
+\includegraphics[width=0.5\textwidth]{fig_collision_free}
 \caption{The probability of collision-free inventory of any of $N$ given $D$ time-slots.}
 \label{fig:pr_collision-free}
 \end{figure}
@@ -70,15 +76,13 @@ If, with an insufficiently small number of slots, there is no initial period whe
 Briefly, \emph{the collision is inaviodable in one inventory cycle.}
 %Though the probability of collision of many tags is relatively insignificant, the probability of experience a collision during a single inventory cycle is real thing and it makes our main question important. 
 
-\section{Signal self-modeling}
-The collision should be detected to avoid inventory errors. But there is no error in the signals, reconstructed after the collision. So we suppose two or more tags transmit at the same time. 
+\section{Inphase-Quadrature Data signal self-modeling}
 \begin{wrapfigure}{r}{0.2\textwidth}  %\begin{figure}[!tb]
-\centering
 \includegraphics[width=\linewidth]{EPC-RFID-TAG.svg.png}
-\caption{A tag emits an ultra-high-frequency signal through its antenna.}
+\caption{A tag emits a UHF signal through its antenna.}
 \label{fig:antenna}%\end{figure}
-\end{wrapfigure}
-The inventory reader decodes the high-frequency signal into the I/Q data signal (In-phase/Quadrature). This signal carries two time series, real and imaginary. Denote these time series by~$\mathbf{x}$, a vector in the complex space. 
+\end{wrapfigure} 
+The collision should be detected to avoid inventory errors. But there is no error in the signals, reconstructed after the collision. So we suppose two or more tags transmit at the same time. The inventory reader decodes the high-frequency signal into the I/Q data signal (In-phase/Quadrature). This signal carries two time series, real and imaginary. Denote these time series by~$\mathbf{x}$, a vector in the complex space. 
 
 Since the tags are located in the different parts of shopping cart its signal is varied by phase and amplitude. Figure~\ref{fig:projected_shift} shows the same signal with the phase and amplitude modifications. The self-regression model approximates these signals with only two parameters: scale and shift.
 
@@ -90,7 +94,7 @@ Since the tags are located in the different parts of shopping cart its signal is
 \label{fig:projected_shift}
 \end{figure}
 
-The self-modeling regression. It approximates the signal~$\bx$ with the standard signal~$\bc$ (call it the centroid) as
+The self-modeling regression approximates the signal~$\bx$ with the standard signal~$\bc$ (call it the centroid) as
 \[
 \hat{\mathbf{c}} = \text{scale} \cdot \bigl( \text{shift}(\mathbf{x})\bigr),
 \]  
@@ -112,67 +116,54 @@ The result of self-modeling is shown in Figure~\ref{fig:cluster}
 \begin{figure}[!tp]
 \centering
 \includegraphics[width=0.45\textwidth]{fig_cluster}
-\caption{After the self-modeling regression, twelve different transmissions became similar (imaginary part is shown).}
+\caption{After the self-modeling regression, twelve different transmissions became similar (imaginary part is shown). The figure shows the cluster of transmitted signals with the same message without noise. They scaled to the same shift phase and amplitude. }
 \label{fig:cluster}
-\end{figure}
-\begin{figure}[!h]
-\centering
-\includegraphics[width=0.5\textwidth]{fig_cluster}
-\includegraphics[width=0.45\textwidth]{fig_noise_pdf}
-\caption{The left part of figure shows the cluster of transmitted signals with the same message without noise. They scaled to the same shift phase and amplitude.  The ground truth noise (right part), samples from the dataset, has $\mu\leq 0.005$ (real or image) and standard deviation~$\sigma =  0.1361$. The plot shows~$3 \sigma$. This distribution function us used in the $\geq 3$ signal reconstruction procedure. }  % mu 0.005097450126825286-9.32958204652807e-05j) sigma: 0.13612418396736398
-\label{fig:demo}
 \end{figure}
 
 Briefly, \emph{self-modeling unifies the signal shape} of  I/Q data, and it makes it a tool to analyze the signal mixtures. 
-
-\newcommand{\bX}{\mathbf{X}}
-\newcommand{\bv}{\mathbf{v}}
-\newcommand{\bp}{\mathbf{p}}
-\newcommand{\by}{\mathbf{y}}
-\newcommand{\beps}{\boldsymbol{\epsilon}}
-
-\section{Signal separation}
-When two or more tags hit the same time slot, their signals mix. Due to the various antenna orientations, they mix with different coefficients.  For~$n$ tags denote the coefficients~$[v_1, \dots, v_n]$. The received noisy mixture~$\mathbf{y}$ approximated the weighted I/Q data signals in the best way:
-\[
-\by \approx \mathbf{p} = v_1 \bx_1 + \dots + v_n \bx_n = \bX\bv
-\] 
-%\[ \by \leadsto \mathbf{p} = v_1 \bx_1 + \dots + v_n \bx_n = \bX\bv \] 
-The columns of the matrix~$\mathbf{X}$ are the stacked I/Q data signals. 
-The coefficients~$\bv$ and their number~$n$ are unknown. But for any mixture coefficients, the signals of collided tags are in the subspace of the space of the matrix~$\mathbf{X}$. Using the self-regression model, find the source signals as the nearest linear combination to the received mixture, see Figure~\ref{fig:lsq}. 
+ 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.6\textwidth]{fig_LSProj_hand}
-\caption{Two or more signals mix proportionally to their attenuation. It defines the vector span in the space of I/Q data signals. The vector~$\mathbf{v}$ is the weights of the linear combinations of the signals. The vector~$\mathbf{p}$ is the orthogonal projection to the span~$\mathbf{X}\mathbf{v}$. The vector~$\mathbf{y}$ is the mixture of signals and the added noise to be reconstructed. The basis of~$P$ independent (the transmitters can not send the same data) I/Q data 
+\includegraphics[width=0.5\textwidth]{fig_LSProj_hand}
+\caption{Two or more signals mix proportionally to their attenuation. It defines the vector span in the space of I/Q data signals. The vector~$\mathbf{v}$ is the weights of the linear combinations of the signals. The vector~$\mathbf{p}$ is the orthogonal projection to the span~$\mathbf{X}\mathbf{v}$. The vector~$\mathbf{y}$ is the mixture of signals and the added noise to be reconstructed. The basis of~$P$ is independent (the transmitters can not send the same data) I/Q data 
 signals~$\mathbf{x}_1,\ldots,\mathbf{x}_P$ form the matrix~$\mathbf{X}=[\mathbf{x}_1,\ldots,\mathbf{x}_P]$ as its columns.}
 \label{fig:lsq}
 \end{figure}
+
+\section{Collision does not matter for the separated signals}
+When two or more tags hit the same time slot, their signals mix. Due to the various antenna orientations, they mix with different coefficients.  For~$n$ tags denote the coefficients~$[v_1, \dots, v_n]$. The received noisy mixture~$\mathbf{y}$ approximated the weighted I/Q data signals in the best way:
+\[
+\mathbf{y} \approx \mathbf{p} = v_1 \bx_1 + \dots + v_n \bx_n = \mathbf{X}\mathbf{v}
+\] 
+%\[ \by \leadsto \mathbf{p} = v_1 \bx_1 + \dots + v_n \bx_n = \bX\bv \] 
+The columns of the matrix~$\mathbf{X}$ are the stacked I/Q data signals. 
+The coefficients~$\mathbf{v}$ and their number~$n$ are unknown. But for any mixture coefficients, the signals of collided tags are in the subspace of the space of the matrix~$\mathbf{X}$. Using the self-regression model, find the source signals as the nearest linear combination to the received mixture, see Figure~\ref{fig:lsq}.
+
+\begin{figure}[!htp]
+\centering
+\includegraphics[width=0.6\textwidth]{fig_mix_one.png}
+\caption{Each line is the number of successfully recognized IDs of the tags after the signal reconstruction. The x-axis shows level of noise from the expected standard deviation to zero. The y-axis shows the proportion of separated signals.}
+\label{fig:separation}
+\end{figure}
 There is no need to use methods like blind signal separation. The self-modeling regression works even for a single-antenna reader. 
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.8\textwidth]{fig_mix_one.png}
-\caption{Each line is the number of successfully recognized IDs of the tags after the signal reconstruction. The x-axis shows level of noise from the expected standard deviation to zero. The y-axis shows the proportion (or number TODO) of randomly generated data.}
-\label{fig:reconstruction}
-\end{figure}
-Figure~\ref{fig:reconstruction} shows that the most expected types of collision: two and three tags hit the same slot. It delivers good TODO I/Q data identity reconstruction.
+Figure~\ref{fig:separation} shows that the most expected types of collision: from two to five three tags hit the same slot. It delivers great I/Q data identity reconstruction.
 
-Briefly, \emph{collision does not matter for the separated signals}. 
+%Briefly, \emph{collision does not matter for the separated signals}. 
 
-\section{Development}
-The code and report on the collision reconstruction: \href{https://github.com/vadim-vic/Signal-separation}{https://github.com/vadim-vic/Signal-separation}
-
-The report on the collision detection: \href{https://github.com/vadim-vic/Signal-separation/blob/main/latex/CollisionDetector.pdf}{https://github.com/vadim-vic/Signal-separation/blob/main/latex/CollisionDetector.pdf}
-
-Though the developed model is portable to an RFID reader, there are ways improve the signal separation. They origins are published by  Aleksandr Katrutsa and Vadim Strijov in the papers~\cite{Katrutsa2017,Katrutsa2015} 
+\section{Development of the I/Q data separation model}
 \begin{enumerate}
-\item Comprehensive study of feature selection methods to solve multicollinearity problem // Expert Systems with Application, 2017
-\item Stress test procedure for feature selection algorithms // Chemometrics and Intelligent Laboratory Systems, 2015
+\item Run the code and \href{https://github.com/vadim-vic/Signal-separation}{report on the collision reconstruction} at \href{https://github.com/vadim-vic/Signal-separation}{github.com/vadim-vic/Signal-separation}. 
+\item Read \href{https://github.com/vadim-vic/Signal-separation/blob/main/latex/CollisionDetector.pdf}{the report on the collision detection}.
 \end{enumerate}
 
-The further models include analysis of  mixture in the high-frequency domain under signal interference conditions.
+Though the developed model is portable to an RFID reader, there are ways to improve the signal separation. The methods are published in our papers~\cite{Katrutsa2017,Katrutsa2015}:
+\begin{enumerate}
+\item \href{https://doi.org/10.1016/j.eswa.2017.01.048}{Comprehensive study of feature selection methods to solve multicollinearity problem} // Expert Systems with Application, 2017
+\item \href{https://doi.org/10.1016/j.chemolab.2015.01.018}{Stress test procedure for feature selection algorithms} // Chemometrics and Intelligent Laboratory Systems, 2015
+\end{enumerate}
 
-We welcome the company, involved to RFID software and hardware development: if you are interested to support this research and join a grant application, please contact the author.
-
+The further models include analysis of mixture in the high-frequency domain under signal interference conditions.
 
 \bibliographystyle{unsrt}
 \bibliography{CollisionDetector}
