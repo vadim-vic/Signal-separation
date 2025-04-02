@@ -6,8 +6,7 @@ Run the short demo in [signal_separation.ipynb](signal_separation.ipynb) or [.py
 
 The figure shows the received signal (red), the reconstructed mixture (black), and the separated I/Q data signals to use as identifiers of tags in the inventory process. There are five signals in the  mixture. 
 
-![The received signal, the reconstructed signal and the origins](../figures/fig_mixture_of_5.png)
-
+![The received signal, the reconstructed signal and the origins](../figures/fig_mixture_of_5.png)<br>
 [How to read this plot](../figures/fig1_how2read.png)
 
 [See more signal separation examples in figures](../figures#readme).
