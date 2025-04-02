@@ -8,4 +8,7 @@ The figure shows the received signal (red), the reconstructed mixture (black), a
 
 ![The received signal, the reconstructed signal and the origins](../figures/fig_mixture_of_5.png)
 
+[How to read this plot](../figures/fig1_how2read.png)
+
 [See more signal separation examples in figures](../figures#readme).
+
