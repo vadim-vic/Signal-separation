@@ -3,7 +3,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plt_clust_Xyy(X, y, y1, idx_X, idx_y, cnt):
+def plt_clust_Xyy(X, y, y1, idx_X, idx_y, cnt, demo=True):
 # Plot (separated real, imag plot) all signals of the matrix X as a cluster
 # and the signal y over it as either a centriod or a target.
   if len(X.shape) == 1:
@@ -39,8 +39,11 @@ def plt_clust_Xyy(X, y, y1, idx_X, idx_y, cnt):
   ax2.legend(loc='upper left', bbox_to_anchor=(1, 1))
   # The whole plot
   plt.tight_layout()
-  plt.savefig('../tmp/' + str(cnt) + '_' + str(idx_y) + str(idx_X) + '_imag.png', dpi=300, bbox_inches='tight')
-  plt.close()
+  if demo:
+    plt.show()
+  else:
+    plt.savefig('../tmp/' + str(cnt) + '_' + str(idx_y) + str(idx_X) + '_imag.png', dpi=300, bbox_inches='tight')
+    plt.close()
   return
 
 def plt_clust_Xy(X, y, idx_X = None, idx_y = None):

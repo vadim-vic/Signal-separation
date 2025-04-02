@@ -14,7 +14,6 @@ def load_data(path = '../data/'):
     iqnoise = iqnoise[:, 0, :] + 1j * iqnoise[:, 1, :]
     return iqdata, iqnoise
 
-
 def get_clusters():
     idx_clusters = {(762, 647, 7, 169, 794, 331, 886, 183, 538, 859),
                     (195, 612, 133, 325, 40, 136, 733, 171, 844, 936, 494, 463, 439, 88, 985, 955, 189, 734),
@@ -165,15 +164,8 @@ def next_sample_dset(dset, idx_basis):
         answer_X = dset[idx]['basis']
         # The same data in the indexes of the full set of basis features
         answer_A = [idx_basis.index(i) if i in idx_basis else -1 for i in answer_X]  # What if -1 happens
-        # The coefficients of mixture TODO not used
+        # The coefficients of mixture (not used)
         answer_coeff = dset[idx]['coeff']
-        # The shifts of mixture TODO not used
+        # The shifts of mixture (not used)
         answer_shift = dset[idx]['shift']
         yield answer_y, answer_A, answer_X, answer_coeff, answer_shift
-
-# To get the data in easy way while setting noise, use the function
-#def get_dset(class_sizes, noise_lvl):
-#    # The arguments of the called function is in the cell visibility
-#    # We suppose they do not change during the experiment
-#    dset = gen_base(iqdata, iqnoise, dbasis, cls_sizes=class_sizes, noise_level=noise_lvl)
-#    return dset

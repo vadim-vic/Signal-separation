@@ -78,6 +78,16 @@ class FeatureSelection:
         best_mdl = min(self.mdl.items(), key=lambda i: i[1]['err'])[1]
         return best_mdl
 
+    def best_y(self):
+        best_mdl = self.best_model()
+        fea = best_mdl['fea']
+        X = self.A[:, fea]
+        par = best_mdl['par']
+        sft = best_mdl['sft']
+        X = shift(X, sft)
+        y1 = X @ par
+        return y1
+
     def update_error(self, y):
         # The Hausdorff distance is used here to replace the Euclidean error.
         for idx in self.mdl.keys():
